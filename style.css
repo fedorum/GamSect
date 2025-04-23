@@ -10,3 +10,11 @@
 .timer {
     margin: auto;
 }
+
+input[type=text] {
+    width: 10%;
+}
+
+input[type=number] {
+    width: 5%;
+}

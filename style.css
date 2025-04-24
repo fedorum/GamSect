@@ -12,9 +12,19 @@
 }
 
 input[type=text] {
-    width: 10%;
+    width: 200px;
 }
 
 input[type=number] {
-    width: 5%;
+    width: 75px;
+}
+
+/* something wrong with text alignment after entering */
+#text-input {
+    margin: auto;
+    margin-top: 20px;
+    border: 1px solid;
+    width: 1000px;
+    height: 500px;
+    text-align: left;
 }

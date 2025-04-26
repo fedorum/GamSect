@@ -3,11 +3,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.generate {
+#generate {
     margin: auto;
 }
 
-.timer {
+#timer {
     margin: auto;
 }
 
@@ -27,4 +27,5 @@ input[type=number] {
     width: 1000px;
     height: 500px;
     text-align: left;
+    margin-bottom: 20px;
 }

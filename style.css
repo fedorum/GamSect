@@ -9,20 +9,33 @@
 }
 
 .column.middle {
+    margin: auto;
     width: 50%;
+}
+
+h1 {
+    margin: 15px;
+}
+
+input[type=text] {
+    width: 200px;
+    text-align: left;
 }
 
 #generate {
     margin: auto;
 }
 
-#timer {
-    margin: auto;
+#quotes {
+    width: 600px;
+    height: 300px;
+    background-color: lightgray;
+    outline-style: solid;
+    outline-width: 1px;
 }
 
-input[type=text] {
-    width: 200px;
-    text-align: left;
+#timer {
+    margin: auto;
 }
 
 input[type=number] {
@@ -39,4 +52,8 @@ input[type=number] {
     height: 500px;
     text-align: left;
     margin-bottom: 20px;
+}
+
+#credentials {
+    margin: 15px;
 }

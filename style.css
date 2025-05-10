@@ -1,11 +1,11 @@
 * {
-    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .column.right {
     float: right;
     width: 25%;
+    text-align: center;
 }
 
 .column.middle {
@@ -15,6 +15,7 @@
 
 h1 {
     margin: 15px;
+    text-align: center;
 }
 
 input[type=text] {
@@ -24,6 +25,7 @@ input[type=text] {
 
 #generate {
     margin: auto;
+    text-align: center;
 }
 
 #quotes {
@@ -40,9 +42,9 @@ input[type=text] {
 
 input[type=number] {
     width: 75px;
+    text-align: center;
 }
 
-/* something wrong with text alignment after entering */
 #text-input {
     padding: 10px;
     margin: auto;
@@ -56,4 +58,5 @@ input[type=number] {
 
 #credentials {
     margin: 15px;
+    text-align: center;
 }

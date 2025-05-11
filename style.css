@@ -36,6 +36,16 @@ input[type=text] {
     outline-width: 1px;
 }
 
+#functions {
+    margin-top: 20px;
+    padding: 10px;
+    width: 750px;
+    height: 25px;
+    background-color: lightblue;
+    outline-style: solid;
+    outline-width: 1px;
+}
+
 #timer {
     margin: auto;
 }

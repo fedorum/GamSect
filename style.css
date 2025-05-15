@@ -13,8 +13,8 @@
     width: 50%;
 }
 
-h1 {
-    margin: 15px;
+#intro {
+    margin: auto;
     text-align: center;
 }
 

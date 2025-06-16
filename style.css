@@ -45,13 +45,10 @@ input[type=number] {
     text-align: center;
 }
 
-#text-editor {
-    margin-left: 559px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
 textarea {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
     padding: 10px;
     border: 1px solid;
     width: 750px;

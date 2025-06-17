@@ -5,12 +5,12 @@
 .column.right {
     float: right;
     width: 25%;
-    text-align: center;
 }
 
 .column.middle {
     margin: auto;
     width: 50%;
+    text-align: center;
 }
 
 #intro {
@@ -23,7 +23,7 @@ input[type=text] {
     text-align: left;
 }
 
-#generate {
+#generation {
     margin: auto;
     text-align: center;
 }
@@ -50,9 +50,9 @@ textarea {
     margin: auto;
     margin-top: 20px;
     padding: 10px;
-    border: 1px solid;
     width: 750px;
     height: 480px;
+    border: 1px solid;
     font-size: 16px;
     resize: none;
 }

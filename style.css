@@ -1,3 +1,9 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -24,7 +30,7 @@
 }
 
 input[type=text] {
-    width: 200px;
+    width: 47.6%;
     text-align: left;
 }
 
@@ -33,17 +39,17 @@ input[type=text] {
     text-align: center;
 }
 
-#storage {
-    width: 550px;
+/* #storage {
+    width: 23%;
     height: 300px;
     background-color: lightblue;
     outline-style: solid;
     outline-width: 1px;
-}
+} */
 
 #quotes {
-    width: 770px;
-    height: 300px;
+    width: 42.1%;
+    height: 35%;
     background-color: lightgray;
     outline-style: solid;
     outline-width: 1px;
@@ -63,14 +69,14 @@ textarea {
     margin: auto;
     margin-top: 20px;
     padding: 10px;
-    width: 750px;
-    height: 480px;
+    height: 100%;
     border: 1px solid;
     font-size: 16px;
     resize: none;
 }
 
 #credentials {
-    margin: 15px;
-    text-align: center;
+    margin: 1%;
+    height: 1%;
+    /* text-align: center; */
 }

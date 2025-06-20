@@ -30,6 +30,7 @@ html, body {
 }
 
 input[type=text] {
+    max-width: 356px;
     width: 47.6%;
     text-align: left;
 }
@@ -48,6 +49,7 @@ input[type=text] {
 } */
 
 #quotes {
+    max-width: 627px;
     width: 42.1%;
     height: 35%;
     background-color: lightgray;

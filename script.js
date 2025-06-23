@@ -20,6 +20,10 @@ function getTimer() {
 
 document.getElementById("startTimer").addEventListener("click", getTimer);
 
+function displayTime() {
+    
+}
+
 // // all purpose function for getting user input in field after clicking button (FIX)
 // function getInput(field) {
 //     var input = document.getElementById(field);

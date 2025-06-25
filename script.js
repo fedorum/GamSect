@@ -8,26 +8,29 @@ function getTheme() {
 
 document.getElementById("generateCustom").addEventListener("click", getTheme);
 
-    // AI generation
+// AI generation
 
-// implement timer functionality
-function getTimer() {
-    var input = document.getElementById("timer");
-    var timer = input.value;
-    console.log(timer);
-    input.value = "";
+// timer functionality
+var interval;
+var timer = document.getElementById("userTime")
+var seconds;
+
+function setTimer() {
+    interval = setInterval(startTimer, 1000);
+    document.getElementById("timer").innerHTML = timer.value;
+    seconds = timer.value;
+    document.getElementById("userTime").value = "";
+    }
+
+document.getElementById("startTimer").addEventListener("click", setTimer);
+
+function startTimer() {
+    seconds -= 1;
+    document.getElementById("timer").innerHTML = seconds;
+    if (seconds < 0) {
+        clearInterval(interval)
+        document.getElementById("timer").innerHTML = "0";
+    }
 }
 
-document.getElementById("startTimer").addEventListener("click", getTimer);
-
-function displayTime() {
-    
-}
-
-// // all purpose function for getting user input in field after clicking button (FIX)
-// function getInput(field) {
-//     var input = document.getElementById(field);
-//     var value = input.value;
-//     console.log(value);
-//     input.value = "";
-// }
+// resetting timer function when new user input given

@@ -49,12 +49,18 @@ input[type=text] {
 } */
 
 #quotes {
+    margin: auto;
+}
+
+#theme {
     max-width: 627px;
+    /* padding: 5px;
     width: 42.1%;
-    height: 35%;
+    height: 35%; */
     background-color: lightgray;
     outline-style: solid;
     outline-width: 1px;
+    text-align: center;
 }
 
 #timer {
@@ -66,19 +72,24 @@ input[type=number] {
     text-align: center;
 }
 
+#editor {
+    height: 53%;
+}
+
 textarea {
     display: block;
     margin: auto;
     margin-top: 20px;
     padding: 10px;
-    height: 100%;
+    width: 63.7%;
+    height: 90%;
     border: 1px solid;
     font-size: 16px;
     resize: none;
 }
 
-#credentials {
+/* #credentials {
     margin: 1%;
     height: 1%;
-    /* text-align: center; */
-}
+    text-align: center;
+} */

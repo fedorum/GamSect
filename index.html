@@ -9,25 +9,28 @@
         <div class="column middle" id="intro">
             <h1>GamSect | Section II Simulator</h1>
         </div>
-        <div class="column middle" id="generation">
+        <div class="column middle" id="userGeneration">
             <p>Enter a theme to generate related quotes or generate quotes based on a random theme.</p>
-            <p><input type="text"> <button id="generateCustom">Generate</button> or <button>Generate random quotes</button></p>
+            <p><input type="text" id="userTheme"> <button id="generateCustom">Generate</button> or <button>Generate random quotes</button></p>
         </div>
         <div class="column left" id="storage">
             <!-- insert stored essays here -->
         </div>
-        <div class="column middle" id="quotes">
-            <p id="theme">Theme</p>
+        <div class="column middle" id="generatedPrompts">
+            <p id="theme">Theme: </p>
+            <div id="prompts">
+                <p>Prompt 1<br>...</p>
+                <p>Prompt 2<br>...</p>
+                <p>Prompt 3<br>...</p>
+                <p>Prompt 4<br>...</p>
+            </div>
         </div>
         <div class="column right">
             <p>Set timer in minutes: <input id="userTime" type="number" min="1" max="90"> <button id="startTimer">Start</button></p>
-            <p id="timer"> 0 </p>
+            <p id="timer">Time: 00:00</p>
         </div>
         <div class="column middle" id="editor">
             <textarea></textarea>
-        </div>
-        <div id="credentials">
-            <!-- Isaac Cheah | GitHub @fedorum -->
         </div>
         <script src="script.js"></script>
     </body>

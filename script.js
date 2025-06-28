@@ -1,8 +1,8 @@
 // generating quotes based on user-input
 function getTheme() {
-    var input = document.getElementById("theme");
+    var input = document.getElementById("userTheme");
     var theme = input.value;
-    console.log(theme);
+    document.getElementById("theme").innerHTML = "Theme: " + theme;
     input.value = "";
 }
 
@@ -17,8 +17,8 @@ var seconds;
 
 function setTimer() {
     interval = setInterval(startTimer, 1000);
-    document.getElementById("timer").innerHTML = timer.value;
     seconds = timer.value;
+    document.getElementById("timer").innerHTML = "Time: " + seconds;
     document.getElementById("userTime").value = "";
     }
 
@@ -26,10 +26,10 @@ document.getElementById("startTimer").addEventListener("click", setTimer);
 
 function startTimer() {
     seconds -= 1;
-    document.getElementById("timer").innerHTML = seconds;
+    document.getElementById("timer").innerHTML = "Time: " + seconds;
     if (seconds < 0) {
         clearInterval(interval)
-        document.getElementById("timer").innerHTML = "0";
+        document.getElementById("timer").innerHTML = "Time: 00:00";
     }
 }
 

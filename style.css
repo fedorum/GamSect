@@ -35,7 +35,7 @@ input[type=text] {
     text-align: left;
 }
 
-#generation {
+#userGeneration {
     margin: auto;
     text-align: center;
 }
@@ -48,19 +48,22 @@ input[type=text] {
     outline-width: 1px;
 } */
 
-#quotes {
+#generatedPrompts {
     margin: auto;
-}
-
-#theme {
-    max-width: 627px;
-    /* padding: 5px;
-    width: 42.1%;
-    height: 35%; */
+    padding-top: 1px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 1px;
+    max-width: 594px;
+    height: 30%;
     background-color: lightgray;
     outline-style: solid;
     outline-width: 1px;
-    text-align: center;
+    text-align: left;
+}
+
+#theme {
+    font-weight: bold;
 }
 
 #timer {
@@ -73,7 +76,7 @@ input[type=number] {
 }
 
 #editor {
-    height: 53%;
+    height: 62%;
 }
 
 textarea {
@@ -81,15 +84,10 @@ textarea {
     margin: auto;
     margin-top: 20px;
     padding: 10px;
-    width: 63.7%;
-    height: 90%;
+    max-width: 606px;
+    width: 63.8%;
+    height: 91.5%;
     border: 1px solid;
     font-size: 16px;
     resize: none;
 }
-
-/* #credentials {
-    margin: 1%;
-    height: 1%;
-    text-align: center;
-} */

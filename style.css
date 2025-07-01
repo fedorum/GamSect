@@ -67,7 +67,7 @@ input[type=text] {
 }
 
 #timer {
-    margin: auto;
+    padding: 0;
 }
 
 input[type=number] {

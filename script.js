@@ -1,4 +1,4 @@
-// generating quotes based on user-input
+// this function gets the user inputted theme
 function getTheme() {
     var input = document.getElementById("userTheme");
     var theme = input.value;
@@ -12,41 +12,50 @@ document.getElementById("generateCustom").addEventListener("click", getTheme);
 
 // timer functionality
 var interval;
-var time = document.getElementById("userTime") * 60;
 var minutes;
 var seconds;
+var timerStarted;
 
-function setTimer() {
-    time = userTime.value * 60;
-    interval = setInterval(startTimer, 1000);
-    minutes = Math.floor(time / 60);
-    seconds = time % 60;
-    document.getElementById("timer").innerHTML = "Time: " + minutes + ":" + seconds;
-    document.getElementById("userTime").value = "";
+// this function gets the user inputted time and starts the timer
+function toggleTimer() {
+    let userTime = document.getElementById("userTime").value;
+    let buttonValue = document.getElementById("timerButton").innerHTML;
+    
+    if ((buttonValue == "Start") && (userTime != "")) {
+        time = document.getElementById("userTime").value * 60;
+        interval = setInterval(timerInterval, 1000); // this makes the timer run every second
+        document.getElementById("userTime").value = "";
+        document.getElementById("timerButton").innerHTML = "Stop";
+        displayTime();
     }
 
-document.getElementById("startTimer").addEventListener("click", setTimer);
+    else if (buttonValue == "Stop") {
+        clearInterval(interval);
+        document.getElementById("timerButton").innerHTML = "Start";
+    }
 
-function startTimer() {
+    // else if (buttonValue == "Start") && ()
+}
+
+document.getElementById("timerButton").addEventListener("click", toggleTimer);
+
+// this function runs every second and ticks down the timer
+function timerInterval() {
     time -= 1;
-    minutes = Math.floor(time / 60);
-    seconds = time % 60;
-    document.getElementById("timer").innerHTML = "Time: " + minutes + ":" + seconds;
-
-    if (time < 0) {
-        clearInterval(interval)
-        document.getElementById("timer").innerHTML = "Time: 00:00";
+    displayTime();
+    if (time <= 0) {
+        clearInterval(interval);
+        document.getElementById("countdown").innerHTML = "Time: 00:00";
     }
 }
 
-// function displayTime() {
-//     minutes = Math.floor(time / 60);
-//     seconds = time % 60;
-//     if (minutes == 0 && minutes <= 9) {
-//         minutes 
-//     }
-
-//     document.getElementById("timer").innerHTML = "Time: " + minutes + ":" + seconds;
-// }
+// this function displays the timer on screen
+function displayTime() {
+    minutes = Math.floor(time / 60);
+    seconds = time % 60;
+    let paddedMins = minutes.toString().padStart(2, "0");
+    let paddedSecs = seconds.toString().padStart(2, "0");
+    document.getElementById("countdown").innerHTML = "Time: " + paddedMins + ":" + paddedSecs;
+}
 
 // resetting timer function when new user input given

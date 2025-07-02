@@ -12,17 +12,20 @@ document.getElementById("generateCustom").addEventListener("click", getTheme);
 
 // timer functionality
 var interval;
-var minutes;
-var seconds;
-var timerStarted;
+var time = 0;
 
 // this function gets the user inputted time and starts the timer
 function toggleTimer() {
     let userTime = document.getElementById("userTime").value;
     let buttonValue = document.getElementById("timerButton").innerHTML;
-    
-    if ((buttonValue == "Start") && (userTime != "")) {
-        time = document.getElementById("userTime").value * 60;
+
+    if (buttonValue == "Start") {
+        
+        // if the user has inputted a time and if no previous timer has been inputted, process the new time
+        if ((userTime != null) && (time == 0)) {
+            time = userTime * 60;
+        }
+
         interval = setInterval(timerInterval, 1000); // this makes the timer run every second
         document.getElementById("userTime").value = "";
         document.getElementById("timerButton").innerHTML = "Stop";
@@ -33,8 +36,6 @@ function toggleTimer() {
         clearInterval(interval);
         document.getElementById("timerButton").innerHTML = "Start";
     }
-
-    // else if (buttonValue == "Start") && ()
 }
 
 document.getElementById("timerButton").addEventListener("click", toggleTimer);
@@ -45,14 +46,15 @@ function timerInterval() {
     displayTime();
     if (time <= 0) {
         clearInterval(interval);
+        time = 0;
         document.getElementById("countdown").innerHTML = "Time: 00:00";
     }
 }
 
 // this function displays the timer on screen
 function displayTime() {
-    minutes = Math.floor(time / 60);
-    seconds = time % 60;
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
     let paddedMins = minutes.toString().padStart(2, "0");
     let paddedSecs = seconds.toString().padStart(2, "0");
     document.getElementById("countdown").innerHTML = "Time: " + paddedMins + ":" + paddedSecs;

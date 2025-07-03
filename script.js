@@ -22,7 +22,7 @@ function toggleTimer() {
     if (buttonValue == "Start") {
         
         // if the user has inputted a time and if no previous timer has been inputted, process the new time
-        if ((userTime != null) && (time == 0)) {
+        if (userTime != "") {
             time = userTime * 60;
         }
 

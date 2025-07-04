@@ -75,11 +75,11 @@ input[type=number] {
     text-align: center;
 }
 
-#editor {
+#textEditor {
     height: 62%;
 }
 
-textarea {
+#editor {
     display: block;
     margin: auto;
     margin-top: 20px;

@@ -1,4 +1,4 @@
-// this function gets the user inputted theme
+// This function gets the user inputted theme
 function getTheme() {
     var input = document.getElementById("userTheme");
     var theme = input.value;
@@ -10,18 +10,18 @@ document.getElementById("generateCustom").addEventListener("click", getTheme);
 
 // AI generation
 
-// timer functionality
+// Timer functionality
 var interval;
 var time = 0;
 
-// this function gets the user inputted time and starts the timer
+// This function gets the user inputted time and starts the timer
 function toggleTimer() {
     let userTime = document.getElementById("userTime").value;
     let buttonValue = document.getElementById("timerButton").innerHTML;
 
     if (buttonValue == "Start") {
         
-        // if the user has inputted a time and if no previous timer has been inputted, process the new time
+        // If the user has inputted a time and if no previous timer has been inputted, process the new time
         if (userTime != "") {
             time = userTime * 60;
         }
@@ -40,7 +40,7 @@ function toggleTimer() {
 
 document.getElementById("timerButton").addEventListener("click", toggleTimer);
 
-// this function runs every second and ticks down the timer
+// This function runs every second and ticks down the timer
 function timerInterval() {
     time -= 1;
     displayTime();
@@ -48,10 +48,11 @@ function timerInterval() {
         clearInterval(interval);
         time = 0;
         document.getElementById("countdown").innerHTML = "Time: 00:00";
+        document.getElementById("editor").disabled = true;
     }
 }
 
-// this function displays the timer on screen
+// This function displays the timer on screen
 function displayTime() {
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;
@@ -60,4 +61,4 @@ function displayTime() {
     document.getElementById("countdown").innerHTML = "Time: " + paddedMins + ":" + paddedSecs;
 }
 
-// resetting timer function when new user input given
+// Resetting timer function when new user input given

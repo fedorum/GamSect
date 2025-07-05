@@ -25,18 +25,17 @@ html, body {
 }
 
 #intro {
-    margin: auto;
     text-align: center;
+    /* insert more parameters here */
 }
 
 input[type=text] {
     max-width: 356px;
-    width: 47.6%;
+    width: 47.5%;
     text-align: left;
 }
 
 #userGeneration {
-    margin: auto;
     text-align: center;
 }
 
@@ -49,7 +48,6 @@ input[type=text] {
 } */
 
 #generatedPrompts {
-    margin: auto;
     padding-top: 1px;
     padding-left: 16px;
     padding-right: 16px;
@@ -68,6 +66,7 @@ input[type=text] {
 
 #timer {
     padding: 0;
+    /* insert more parameters here */
 }
 
 input[type=number] {
@@ -76,7 +75,14 @@ input[type=number] {
 }
 
 #textEditor {
-    height: 62%;
+    /* max-width: 600px; */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    max-width: 626px;
+    height: 50%;
+    background-color: lightgray;
+    outline-style: solid;
+    outline-width: 1px;
 }
 
 #editor {
@@ -85,7 +91,7 @@ input[type=number] {
     margin-top: 20px;
     padding: 10px;
     max-width: 606px;
-    width: 63.8%;
+    width: 63.5%;
     height: 91.5%;
     border: 1px solid;
     font-size: 16px;

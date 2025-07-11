@@ -1,8 +1,9 @@
 // This function gets the user inputted theme
 function getTheme() {
-    var input = document.getElementById("userTheme");
-    var theme = input.value;
-    document.getElementById("theme").innerHTML = "Theme: " + theme;
+    let input = document.getElementById("userTheme");
+    let theme = input.value;
+    let displayTheme = theme.charAt(0).toUpperCase() + theme.slice(1);
+    document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
     input.value = "";
 }
 

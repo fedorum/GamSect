@@ -1,3 +1,5 @@
+// import { generatePrompts } from "./gemini.js";
+
 // This function gets the user inputted theme
 function getTheme() {
     let input = document.getElementById("userTheme");
@@ -5,6 +7,8 @@ function getTheme() {
     let displayTheme = theme.charAt(0).toUpperCase() + theme.slice(1);
     document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
     input.value = "";
+    // generatePrompts(theme);
+    // console.log(theme);
 }
 
 document.getElementById("generateCustom").addEventListener("click", getTheme);
@@ -29,7 +33,9 @@ function toggleTimer() {
 
         interval = setInterval(timerInterval, 1000); // this makes the timer run every second
         document.getElementById("userTime").value = "";
-        document.getElementById("timerButton").innerHTML = "Stop";
+        if (userTime != 0) {
+            document.getElementById("timerButton").innerHTML = "Stop";
+        }
         displayTime();
     }
 

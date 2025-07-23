@@ -1,4 +1,4 @@
-// import { generatePrompts } from "./gemini.js";
+import { generatePrompts } from "./gemini.js";
 
 // This function gets the user inputted theme
 function getTheme() {
@@ -7,8 +7,7 @@ function getTheme() {
     let displayTheme = theme.charAt(0).toUpperCase() + theme.slice(1);
     document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
     input.value = "";
-    // generatePrompts(theme);
-    // console.log(theme);
+    generatePrompts(theme);
 }
 
 document.getElementById("generateCustom").addEventListener("click", getTheme);

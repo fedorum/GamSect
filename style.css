@@ -39,14 +39,6 @@ input[type=text] {
     text-align: center;
 }
 
-/* #storage {
-    width: 23%;
-    height: 300px;
-    background-color: lightblue;
-    outline-style: solid;
-    outline-width: 1px;
-} */
-
 #generatedPrompts {
     padding-top: 1px;
     padding-left: 16px;

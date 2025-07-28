@@ -24,17 +24,18 @@ function toggleTimer() {
     let buttonValue = document.getElementById("timerButton").innerHTML;
 
     if (buttonValue == "Start") {
-        
+
         // If the user has inputted a time and if no previous timer has been inputted, process the new time
         if (userTime != "") {
             time = userTime * 60;
         }
 
-        interval = setInterval(timerInterval, 1000); // this makes the timer run every second
-        document.getElementById("userTime").value = "";
-        if (userTime != 0) {
+        if (time != 0) {
+            interval = setInterval(timerInterval, 1000); // this makes the timer run every second
+            document.getElementById("userTime").value = "";
             document.getElementById("timerButton").innerHTML = "Stop";
         }
+
         displayTime();
     }
 

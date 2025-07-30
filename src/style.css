@@ -24,8 +24,11 @@ html, body {
     width: 25%;
 }
 
-#intro {
+#header {
+    /* width: 100%; */
     text-align: center;
+    /* background-color: lightskyblue; */
+    /* opacity: 50%; */
     /* insert more parameters here */
 }
 

@@ -1,4 +1,4 @@
-import { generatePrompts } from "./gemini.js";
+import { generatePrompts } from "../src/gemini.js";
 
 // This function gets the user inputted theme
 function getTheme() {
@@ -11,8 +11,6 @@ function getTheme() {
 }
 
 document.getElementById("generateCustom").addEventListener("click", getTheme);
-
-// AI generation
 
 // Timer functionality
 var interval;
@@ -67,5 +65,3 @@ function displayTime() {
     let paddedSecs = seconds.toString().padStart(2, "0");
     document.getElementById("countdown").innerHTML = "Time: " + paddedMins + ":" + paddedSecs;
 }
-
-// Resetting timer function when new user input given

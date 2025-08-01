@@ -1,6 +1,8 @@
-import { generatePrompts } from "../src/gemini.js";
+// PROMPT GENERATION
 
-// This function gets the user inputted theme
+import { generatePrompts } from "./gemini.js";
+
+// gets the user inputted theme when the 'generate' button is pressed
 function getTheme() {
     let input = document.getElementById("userTheme");
     let theme = input.value;
@@ -12,24 +14,25 @@ function getTheme() {
 
 document.getElementById("generateCustom").addEventListener("click", getTheme);
 
-// Timer functionality
+// TIMER
+
 var interval;
 var time = 0;
 
-// This function gets the user inputted time and starts the timer
+// gets the user inputted time and starts the timer
 function toggleTimer() {
     let userTime = document.getElementById("userTime").value;
     let buttonValue = document.getElementById("timerButton").innerHTML;
 
     if (buttonValue == "Start") {
 
-        // If the user has inputted a time and if no previous timer has been inputted, process the new time
+        // if the user has inputted a time and if no previous timer has been inputted, process the new time
         if (userTime != "") {
             time = userTime * 60;
         }
 
         if (time != 0) {
-            interval = setInterval(timerInterval, 1000); // this makes the timer run every second
+            interval = setInterval(timerInterval, 1000); // makes the timer run every second
             document.getElementById("userTime").value = "";
             document.getElementById("timerButton").innerHTML = "Stop";
         }
@@ -45,7 +48,7 @@ function toggleTimer() {
 
 document.getElementById("timerButton").addEventListener("click", toggleTimer);
 
-// This function runs every second and ticks down the timer
+// runs every second and ticks down the timer
 function timerInterval() {
     time -= 1;
     displayTime();
@@ -57,7 +60,7 @@ function timerInterval() {
     }
 }
 
-// This function displays the timer on screen
+// displays the timer on screen
 function displayTime() {
     let minutes = Math.floor(time / 60);
     let seconds = time % 60;

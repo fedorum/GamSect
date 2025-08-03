@@ -1,7 +1,6 @@
 html, body {
-    height: 100%;
-    width: 100%;
     margin: 0;
+    overflow: hidden;
 }
 
 * {
@@ -10,18 +9,17 @@ html, body {
 
 .column.left {
     float: left;
-    width: 25%;
+    width: 25vw;
 }
 
 .column.middle {
     margin: auto;
-    /* width: 50%; */
     text-align: center;
 }
 
 .column.right {
     float: right;
-    width: 10%;
+    width: 10vw;
 }
 
 #header {
@@ -33,25 +31,29 @@ html, body {
 }
 
 input[type=text] {
-    max-width: 356px;
-    width: 47.5%;
+    width: 70%;
     text-align: left;
 }
 
-#userGeneration {
-    text-align: center;
+.container {
+    display: flex;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+#promptGeneration {
+    width: 53vw;
+    height: 29vh;
 }
 
 #generatedPrompts {
-    padding-top: 1px;
     padding-left: 16px;
     padding-right: 16px;
-    padding-bottom: 1px;
-    max-width: 966px;
-    height: 30%;
-    background-color: lightgray;
-    outline-style: solid;
-    outline-width: 1px;
+    width: 61%;
+    height: 100%;
+    background-color: rgb(235, 235, 235);
+    outline: 1px solid;
     text-align: left;
 }
 
@@ -59,29 +61,25 @@ input[type=text] {
     font-weight: bold;
 }
 
-#timer {
-    margin-top: 10px;
-    margin-right: 12%;
-    padding: 0;
-    /* text-align: center; */
-    /* insert more parameters here */
-}
-
-input[type=number] {
-    width: 75px;
+#userGeneration {
+    width: 33%;
+    height: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: rgb(235, 235, 235);
+    outline: 1px solid;
     text-align: center;
 }
 
 #textEditor {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    max-width: 1000px;
-    height: 60%;
+    width: 65vw;
+    height: 58vh;
+    margin-left: 23.45vw;
 }
 
 #editor {
     padding: 10px;
-    width: 100%;
+    width: 81.8%;
     height: 100%;
     border: 1px solid;
     font-size: 16px;
@@ -92,6 +90,22 @@ input[type=number] {
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-#footer {
-    height: 10px;
+#timer {
+    width: 14.9%;
+    height: 27%;
+    margin-left: 2%;
+    border: 1px solid;
+    text-align: center;
+    /* insert more parameters here */
+}
+
+#countdown {
+    margin-top: 10%;
+    margin-bottom: 8%;
+    font-size: 30px;
+}
+
+input[type=number] {
+    width: 70%;
+    text-align: center;
 }

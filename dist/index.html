@@ -9,32 +9,40 @@
         <div class="column middle" id="header">
             <h1>GamSect | Section II Simulator</h1>
         </div>
-        <div class="column middle" id="userGeneration">
-            <p>Enter a theme to generate related quotes or generate quotes based on a random theme.</p>
-            <p><input type="text" id="userTheme"> <button id="generateCustom">Generate</button> or <button>Generate random quotes</button></p>
+
+        <div class="container" id="promptGeneration">
+            <div id="generatedPrompts">
+                <p id="theme">Theme: </p>
+                <div id="prompts">
+                    <p>Prompt 1<br>...</p>
+                    <p>Prompt 2<br>...</p>
+                    <p>Prompt 3<br>...</p>
+                    <p>Prompt 4<br>...</p>
+                </div>
+            </div>
+            <div id="userGeneration">
+                <p>Enter a theme to generate related prompts.</p>
+                <p><input type="text" id="userTheme"> <button id="generateCustom">Generate</button>
+                <p> OR </p>
+                <p>Generate prompts based on a random theme.</p>
+                <button>Generate random prompts</button></p>
+            </div>
         </div>
+
         <div class="column left" id="storage">
             <!-- insert stored essays here -->
         </div>
-        <div class="column middle" id="generatedPrompts">
-            <p id="theme">Theme: </p>
-            <div id="prompts">
-                <p>Prompt 1<br>...</p>
-                <p>Prompt 2<br>...</p>
-                <p>Prompt 3<br>...</p>
-                <p>Prompt 4<br>...</p>
+
+        <div class="container" id="textEditor">
+            <textarea id="editor" placeholder="Click here to start typing" spellcheck="false"></textarea>
+            <div class="column right" id="timer">
+                <p id="countdown">00:00</p>
+                <!-- <p>Set timer in minutes: <br><input id="userTime" type="number" min="1" max="90"></p> -->
+                <input id="userTime" type="number" min="1" max="90" placeholder="Set time in minutes">
+                <p><button id="timerButton">Start</button> <button>Stop</button> <button>Reset</button></p>
             </div>
         </div>
-        <div class="column right" id="timer">
-            <p>Set timer in minutes: <br><input id="userTime" type="number" min="1" max="90"> <button id="timerButton">Start</button></p>
-            <p id="countdown">Time: 00:00</p>
-        </div>
-        <div class="column middle" id="textEditor">
-            <textarea id="editor" placeholder="Click here to start typing" spellcheck="false"></textarea>
-        </div>
-        <div id="footer">
-            <!-- footer -->
-        </div>
+
         <script type="module" src="main.js"></script>
     </body>
 </html>

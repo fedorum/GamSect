@@ -55,7 +55,7 @@ function timerInterval() {
     if (time <= 0) {
         clearInterval(interval);
         time = 0;
-        document.getElementById("countdown").innerHTML = "Time: 00:00";
+        document.getElementById("countdown").innerHTML = "00:00";
         document.getElementById("editor").disabled = true;
     }
 }
@@ -66,5 +66,5 @@ function displayTime() {
     let seconds = time % 60;
     let paddedMins = minutes.toString().padStart(2, "0");
     let paddedSecs = seconds.toString().padStart(2, "0");
-    document.getElementById("countdown").innerHTML = "Time: " + paddedMins + ":" + paddedSecs;
+    document.getElementById("countdown").innerHTML = paddedMins + ":" + paddedSecs;
 }

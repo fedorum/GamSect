@@ -22,7 +22,7 @@ var time = 0;
 // gets the user inputted time and starts the timer
 function toggleTimer() {
     let userTime = document.getElementById("userTime").value;
-    let buttonValue = document.getElementById("timerButton").innerHTML;
+    let buttonValue = document.getElementById("startButton").innerHTML;
 
     if (buttonValue == "Start") {
 
@@ -34,7 +34,7 @@ function toggleTimer() {
         if (time != 0) {
             interval = setInterval(timerInterval, 1000); // makes the timer run every second
             document.getElementById("userTime").value = "";
-            document.getElementById("timerButton").innerHTML = "Stop";
+            document.getElementById("startButton").innerHTML = "Stop";
         }
 
         displayTime();
@@ -42,11 +42,22 @@ function toggleTimer() {
 
     else if (buttonValue == "Stop") {
         clearInterval(interval);
-        document.getElementById("timerButton").innerHTML = "Start";
+        document.getElementById("startButton").innerHTML = "Start";
     }
 }
 
-document.getElementById("timerButton").addEventListener("click", toggleTimer);
+document.getElementById("startButton").addEventListener("click", toggleTimer);
+
+function resetTimer() {
+    if (time != 0) {
+        time = 0;
+        clearInterval(interval);
+        document.getElementById("countdown").innerHTML = "00:00";
+        document.getElementById("startButton").innerHTML = "Start";
+    }
+}
+
+document.getElementById("resetButton").addEventListener("click", resetTimer);
 
 // runs every second and ticks down the timer
 function timerInterval() {

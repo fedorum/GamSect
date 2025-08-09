@@ -6,4 +6,5 @@ Prompts are generated using Google's Gemini API, which takes into account GAMSAT
 
 # Usage
 Download the repository and double-click the index.html file to run the webpage.
-- Type in a specific theme into the text box and press the 'generate' button to generate prompts based on the theme
+- Type in a specific theme into the text box and click the 'Generate' button to generate prompts based on the theme
+- Clicking the 'Generate random prompts' button will generate prompts based on a random theme

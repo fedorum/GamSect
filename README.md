@@ -11,3 +11,6 @@ The program is run by downloading the repository and double-clicking the index.h
 - Type in a specific theme into the text box and click the 'Generate' button to generate prompts based on the theme
 - Clicking the 'Generate random prompts' button will generate prompts based on a random theme
 - Start the timer by entering in a number in minutes (maximum of 60 minutes) and clicking the 'Start' button
+
+# Notes
+- Once the timer runs out, the editor will be locked and cannot be used

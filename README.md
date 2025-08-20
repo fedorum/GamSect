@@ -14,3 +14,4 @@ The program is run by downloading the repository and double-clicking the index.h
 
 # Notes
 - Once the timer runs out, the editor will be locked and cannot be used
+- Click the 'Continue editing' button to unfreeze the editor and continue typing

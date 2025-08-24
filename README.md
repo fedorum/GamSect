@@ -18,3 +18,4 @@ The program is run by downloading the repository and double-clicking the index.h
 
 # WIP
 - Switch between Practice mode and Exam mode
+- Download essay as word document after writing

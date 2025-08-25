@@ -6,27 +6,44 @@
         <title>GamSect</title>
     </head>
     <body>
-        <div class="column middle" id="header">
-            <h1>GamSect | Section II Simulator</h1>
+        <div class="container" id="header">
+            <p>GAMSECT Section II Simulator: Reasoning in Humanities and Social Sciences and Written Communication</p>
         </div>
 
-        <div class="container" id="promptGeneration">
-            <div id="generatedPrompts">
-                <p id="theme">Theme: </p>
-                <div id="prompts">
-                    <p>Prompt 1<br>...</p>
-                    <p>Prompt 2<br>...</p>
-                    <p>Prompt 3<br>...</p>
-                    <p>Prompt 4<br>...</p>
+        <div id="topBar?">
+
+            <div class="container" id="promptGeneration">
+
+                <div id="generatedPrompts">
+                    <p id="theme">Theme: </p>
+                    <div id="prompts">
+                        <p>Comment 1<br>...</p>
+                        <p>Comment 2<br>...</p>
+                        <p>Comment 3<br>...</p>
+                        <p>Comment 4<br>...</p>
+                    </div>
                 </div>
+
+                <div id="userControls">
+
+                    <div id="userGeneration">
+                        <p>Enter a theme to generate related prompts.</p>
+                        <input id="userTheme" type="text" placeholder="Input a theme"> <button id="generateCustom">Generate</button>
+                        <p> OR </p>
+                        <p>Generate prompts based on a random theme.</p>
+                        <button id="generateRandom">Generate</button></p>
+                    </div>
+
+                    <div id="timer">
+                        <input id="userTime" type="number" min="1" max="90" placeholder="Set time in minutes">
+                        <p id="countdown">00:00</p>
+                        <button id="startButton">Start</button> <button id="resetButton">Reset</button>
+                    </div>
+
+                </div>
+
             </div>
-            <div id="userGeneration">
-                <p>Enter a theme to generate related prompts.</p>
-                <p><input type="text" id="userTheme"> <button id="generateCustom">Generate</button>
-                <p> OR </p>
-                <p>Generate prompts based on a random theme.</p>
-                <button id="generateRandom">Generate</button></p>
-            </div>
+
         </div>
 
         <div class="column left" id="storage">
@@ -34,13 +51,14 @@
         </div>
 
         <div class="container" id="textEditor">
-            <textarea id="editor" placeholder="Click here to start typing" spellcheck="false"></textarea>
-            <div class="column right" id="timer">
-                <p id="countdown">00:00</p>
-                <!-- <p>Set timer in minutes: <br><input id="userTime" type="number" min="1" max="90"></p> -->
-                <input id="userTime" type="number" min="1" max="90" placeholder="Set time in minutes">
-                <p><button id="startButton">Start</button> <button id="resetButton">Reset</button></p>
+
+            <div id="editorButtons">
+                <button id="undoButton">Undo</button><button id="redoButton">Redo</button>
             </div>
+            
+            <textarea id="editor" placeholder="Click here to begin" spellcheck="false"></textarea>
+            <!-- <button id="saveButton">Save</button> -->
+            
         </div>
 
         <script type="module" src="main.js"></script>

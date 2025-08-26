@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-size: 14.6px;
 }
 
 * {
@@ -31,18 +32,18 @@ html, body {
 }
 
 #header {
-    height: 6.4vh;
+    height: 7vh;
     margin: 0;
-    padding-left: 23.5vw;
+    padding-left: 15.5vw;
     padding-top: 0;
     color: white;
     background-color: rgb(0, 152, 212);
-    font-size: 22px;
+    font-size: 22.3px;
     line-height: 1.6vh;
 }
 
 #promptGeneration {
-    width: 53vw;
+    width: 69vw;
     height: 31vh;
     margin-bottom: 0;
 }
@@ -89,7 +90,9 @@ html, body {
 
 #generateCustom,
 #generateRandom {
+    margin: 0;
     height: 14%;
+    font-size: 14px;
 }
 
 #timer {
@@ -103,13 +106,13 @@ html, body {
 
 #countdown {
     margin: 0;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 #userTime {
     width: 38%;
     height: 48%;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
 }
 
@@ -121,13 +124,14 @@ input::-webkit-inner-spin-button {
 
 #startButton, #resetButton {
     height: 59%;
+    font-size: 14px;
 }
 
 #textEditor {
-    width: 53vw;
+    width: 69vw;
     height: 58vh;
     margin-top: 0;
-    margin-left: 23.45vw;
+    /* margin-left: 23.45vw; */
     border: 1px solid rgb(200, 200, 200);
     border-top: none;
     border-bottom-left-radius: 5px;

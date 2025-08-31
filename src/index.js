@@ -4,7 +4,7 @@ import { generatePrompts } from "./gemini.js";
 
 // gets the user inputted theme when the 'generate' button is pressed
 function getTheme() {
-    let input = document.getElementById("userTheme");
+    let input = document.getElementById("userThemeInput");
     let theme = input.value;
     let displayTheme = theme.charAt(0).toUpperCase() + theme.slice(1);
     document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
@@ -12,7 +12,7 @@ function getTheme() {
     generatePrompts(theme);
 }
 
-document.getElementById("generateCustom").addEventListener("click", getTheme);
+document.getElementById("generateCustomButton").addEventListener("click", getTheme);
 
 // TIMER
 
@@ -21,7 +21,7 @@ var time = 0;
 
 // gets the user inputted time and starts the timer
 function toggleTimer() {
-    let userTime = document.getElementById("userTime").value;
+    let userTime = document.getElementById("userTimeInput").value;
     let buttonValue = document.getElementById("startButton").innerHTML;
 
     if (buttonValue == "Start") {
@@ -33,7 +33,7 @@ function toggleTimer() {
 
         if (time != 0) {
             interval = setInterval(timerInterval, 1000); // makes the timer run every second
-            document.getElementById("userTime").value = "";
+            document.getElementById("userTimeInput").value = "";
             document.getElementById("startButton").innerHTML = "Stop";
         }
 
@@ -79,3 +79,7 @@ function displayTime() {
     let paddedSecs = seconds.toString().padStart(2, "0");
     document.getElementById("countdown").innerHTML = paddedMins + ":" + paddedSecs;
 }
+
+// TEXT EDITOR
+
+// undo and redo button functionality

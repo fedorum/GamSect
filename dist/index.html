@@ -10,44 +10,40 @@
             <p id="title">GAMSECT Section II Simulator: Reasoning in Humanities and Social Sciences and Written Communication</p>
         </div>
 
-        <div id="topBar?">
+        <div class="container" id="userDisplayBox">
 
-            <div class="container" id="promptGeneration">
+            <div id="generatedPromptsBox">
+                <p id="theme">Theme: </p>
+                <div id="prompts">
+                    <p>Comment 1<br>...</p>
+                    <p>Comment 2<br>...</p>
+                    <p>Comment 3<br>...</p>
+                    <p>Comment 4<br>...</p>
+                </div>
+            </div>
 
-                <div id="generatedPrompts">
-                    <p id="theme">Theme: </p>
-                    <div id="prompts">
-                        <p>Comment 1<br>...</p>
-                        <p>Comment 2<br>...</p>
-                        <p>Comment 3<br>...</p>
-                        <p>Comment 4<br>...</p>
-                    </div>
+            <div id="userControlsBox">
+
+                <div id="generateCustomPromptsBox">
+                    <p id="instruction">Enter a theme to generate related prompts</p>
+                    <input id="userThemeInput" type="text" placeholder="Input a theme">
+                    <button id="generateCustomButton">Generate</button>
                 </div>
 
-                <div id="userControls">
+                <div id="generateRandomPromptsBox">
+                    <p> OR </p>
+                    <p>Generate prompts based on a random theme</p>
+                    <button id="generateRandomButton">Generate</button>
+                </div>
 
-                    <div id="userGeneration">
-                        <p>Enter a theme to generate related prompts</p>
-                        <p><input id="userTheme" type="text" placeholder="Input a theme"> <button id="generateCustom">Generate</button></p>
-                        <p> OR </p>
-                        <p>Generate prompts based on a random theme</p>
-                        <button id="generateRandom">Generate</button></p>
-                    </div>
-
-                    <div id="timer">
-                        <input id="userTime" type="number" min="1" max="90" placeholder="Set time in minutes">
-                        <p id="countdown">00:00</p>
-                        <button id="startButton">Start</button> <button id="resetButton">Reset</button>
-                    </div>
-
+                <div id="timerDisplayBox">
+                    <input id="userTimeInput" type="number" min="1" max="90" placeholder="Set time in minutes">
+                    <p id="countdown">00:00</p>
+                    <button id="startButton">Start</button> <button id="resetButton">Reset</button>
                 </div>
 
             </div>
 
-        </div>
-
-        <div class="column left" id="storage">
-            <!-- insert stored essays here -->
         </div>
 
         <div class="container" id="textEditor">

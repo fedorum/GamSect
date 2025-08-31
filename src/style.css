@@ -15,7 +15,6 @@ html, body {
 }
 
 #header {
-    /* height: 60px; */
     height: auto;
     margin: auto;
     color: white;
@@ -28,22 +27,19 @@ html, body {
     margin: auto;
     margin-top: 1.65vh;
     margin-bottom: 1.65vh;
-    /* margin-left: 4vw; */
-    /* text-align: left; */
 }
 
-#promptGeneration {
-    width: 54vw;
-    /* height: 288px; */
+#userDisplayBox {
+    /* width: 54vw; */
+    width: 1036px;
     height: auto;
     margin-bottom: 0;
     background-color: rgb(245, 245, 245);
     border: 1px solid rgb(210, 210, 210);
 }
 
-#generatedPrompts {
+#generatedPromptsBox {
     width: 61%;
-    /* height: 100%; */
     height: auto;
     padding-left: 16px;
     padding-right: 16px;
@@ -59,7 +55,7 @@ html, body {
     font-style: italic;
 }
 
-#userControls {
+#userControlsBox {
     width: 36%;
     height: 100%;
     text-align: center;
@@ -68,33 +64,55 @@ html, body {
 #userGeneration {
     height: auto;
     padding-left: 16px;
-    padding-right: 16px;
-    border-bottom: 1px solid rgb(210, 210, 210);
+    padding-right: 16px;   
 }
 
-#userTheme {
+#instruction {
+    margin-bottom: 0;
+}
+
+#userThemeInput {
     width: 65%;
     height: 11%;
     font-size: 14px;
     text-align: center;
 }
 
-#generateCustom,
-#generateRandom {
+#generateCustomPromptsBox {
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+#generateRandomPromptsBox {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 23px;
+    border-bottom: 1px solid rgb(210, 210, 210);
+}
+
+#generateCustomButton,
+#generateRandomButton {
     margin: 0;
     height: 14%;
     font-size: 14px;
 }
 
-#timer {
+#timerDisplayBox {
     height: auto;
-    padding-top: 25px;
+    padding-top: 23px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     text-align: left;
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
+    justify-content: center;
 }
 
 #countdown {
@@ -103,25 +121,28 @@ html, body {
     line-height: 2.4vh;
 }
 
-#userTime {
+#userTimeInput {
     width: 40%;
     font-size: 13px;
     text-align: center;
 }
 
+/* ? */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-#startButton, #resetButton {
+#startButton,
+#resetButton {
     height: 59%;
     font-size: 14px;
 }
 
 #textEditor {
-    width: 54vw;
+    /* width: 54vw; */
+    width: 1036px;
     height: 532px;
     margin-top: 0;
     margin-bottom: 2.1vh;

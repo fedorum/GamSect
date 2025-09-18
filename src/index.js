@@ -1,18 +1,45 @@
 // PROMPT GENERATION
 
+// capitalises the first letter of each word in a theme for aesthetics
+function capitalise(string) {
+    const words = string.split(" ");
+    
+    // iterates through the 'words' array and capitalises the first letter of each word
+    const capitalisedString = words.map(word => {
+        if (word.length == 0) {
+            return "";
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
+
+    // joins the map of capitalised words together to form a single string
+    return capitalisedString.join(" ");
+}
+
 import { generatePrompts } from "./gemini.js";
 
-// gets the user inputted theme when the 'generate' button is pressed
-function getTheme() {
+// generates prompts related to the user input when the 'generate' button is pressed
+function generateCustom() {
     let input = document.getElementById("userThemeInput");
     let theme = input.value;
-    let displayTheme = theme.charAt(0).toUpperCase() + theme.slice(1);
+    let displayTheme = capitalise(theme);
     document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
     input.value = "";
     generatePrompts(theme);
 }
 
-document.getElementById("generateCustomButton").addEventListener("click", getTheme);
+document.getElementById("generateCustomButton").addEventListener("click", generateCustom);
+
+// generates random prompts when the 'generate' button is pressed
+function generateRandom() {
+    // find a way to randomise the theme
+    let theme = "random";
+    let displayTheme = capitalise(theme);
+    document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
+    generatePrompts(theme);
+}
+
+document.getElementById("generateRandomButton").addEventListener("click", generateRandom);
 
 // TIMER
 
@@ -83,3 +110,18 @@ function displayTime() {
 // TEXT EDITOR
 
 // undo and redo button functionality
+const editor = document.getElementById("editor");
+
+function undo() {
+    editor.focus();
+    document.execCommand("undo", false, null);
+}
+
+document.getElementById("undoButton").addEventListener("click", undo);
+
+function redo() {
+    editor.focus();
+    document.execCommand("redo", false, null);
+}
+
+document.getElementById("redoButton").addEventListener("click", redo);

@@ -94,7 +94,9 @@ function timerInterval() {
         clearInterval(interval);
         time = 0;
         document.getElementById("countdown").innerHTML = "00:00";
+        document.getElementById("startButton").innerHTML = "Start";
         document.getElementById("editor").disabled = true;
+        document.getElementById("unlockButton").classList.add("show");
     }
 }
 
@@ -125,3 +127,11 @@ function redo() {
 }
 
 document.getElementById("redoButton").addEventListener("click", redo);
+
+// unlocks the editor and hides the 'unlock' button
+function unlock() {
+    document.getElementById("editor").disabled = false;
+    document.getElementById("unlockButton").classList.remove("show");
+}
+
+document.getElementById("unlockButton").addEventListener("click", unlock);

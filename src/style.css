@@ -35,7 +35,7 @@ body {
 
 #userDisplayBox {
     width: 1036px;
-    max-width: calc(100% - 3.5vw);
+    max-width: calc(100% - 24px);
     height: auto;
     margin-bottom: 0;
     background-color: rgb(245, 245, 245);
@@ -165,7 +165,7 @@ input::-webkit-inner-spin-button {
 
 #textEditorBox {
     width: 1036px;
-    max-width: calc(100% - 3.5vw);
+    max-width: calc(100% - 24px);
     height: 524px;
     margin-top: 0;
     border: 1px solid rgb(210, 210, 210);

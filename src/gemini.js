@@ -1,7 +1,7 @@
 // PROMPT GENERATION
 
 // importing the gemini module for the prompt generation
-import { GoogleGenAI } from "@google/genai";
+// import { GoogleGenAI } from "@google/genai";
 
 // const apiKey = process.env.GEMINI_API_KEY;
 // const ai = new GoogleGenAI({ apiKey: apiKey});

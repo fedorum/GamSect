@@ -3,7 +3,7 @@
 // capitalises the first letter of each word in a theme for aesthetics
 function capitalise(string) {
     const words = string.split(" ");
-    
+
     // iterates through the 'words' array and capitalises the first letter of each word
     const capitalisedString = words.map(word => {
         if (word.length == 0) {
@@ -16,7 +16,20 @@ function capitalise(string) {
     return capitalisedString.join(" ");
 }
 
-import { generatePrompts } from "./gemini.js";
+// 
+async function callGemini(theme) {
+    const response = await fetch("gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            contents: [{ parts: [{ text: "Generate 4 prompts in the style of the GAMSAT section II exam on the theme of " + theme }] }],
+        }),
+    });
+    
+    const prompts = await response.json();
+    console.log(prompts);
+    // return prompts;
+}
 
 // generates prompts related to the user input when the 'generate' button is pressed
 function generateCustom() {
@@ -25,7 +38,10 @@ function generateCustom() {
     let displayTheme = capitalise(theme);
     document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
     input.value = "";
-    generatePrompts(theme);
+
+    // fix this
+    console.log(theme);
+    callGemini(theme);
 }
 
 document.getElementById("generateCustomButton").addEventListener("click", generateCustom);
@@ -36,7 +52,10 @@ function generateRandom() {
     let theme = "random";
     let displayTheme = capitalise(theme);
     document.getElementById("theme").innerHTML = "Theme: " + displayTheme;
-    generatePrompts(theme);
+    
+    // fix this
+    // callGemini(prompt);
+    console.log(prompt);
 }
 
 document.getElementById("generateRandomButton").addEventListener("click", generateRandom);
@@ -135,3 +154,14 @@ function unlock() {
 }
 
 document.getElementById("unlockButton").addEventListener("click", unlock);
+
+// TESTING
+
+const theme = "freedom";
+
+// const test = JSON.stringify("Generate 4 prompts in the style of the GAMSAT essay on the theme of " + theme);
+const test = JSON.stringify({
+        contents: [{ parts: [{ text: "Generate 4 prompts in the style of the GAMSAT section II exam on the theme of " + theme }] }],
+    })
+
+// console.log(test);

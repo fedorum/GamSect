@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="G.png" type="image/x-icon">
+        <title>GamSect</title>
+    </head>
+    <body>
+        <div class="container" id="header">
+
+            <p id="title">GAMSECT Section II Simulator: Reasoning in Humanities and Social Sciences and Written Communication</p>
+
+        </div>
+
+        <div class="container" id="userDisplayBox">
+
+            <div id="generatedCommentsBox">
+
+                <p id="theme">Theme: ?</p>
+
+                <div class="container comment" id="comment1Box">
+                    <p class="commentNumber">Comment 1</p>
+                    <!-- <p class="comment">...</p> -->
+                    <!-- <p class="comment">It does not take much to reveal the primitive and animal side of human nature.</p> -->
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="container comment">
+                    <p class="commentNumber">Comment 2</p>
+                    <!-- <p class="comment">...</p> -->
+                    <!-- <p class="comment">If voting threatened to really change anything we would not have the vote.</p> -->
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="container comment">
+                    <p class="commentNumber">Comment 3</p>
+                    <!-- <p class="comment">...</p> -->
+                    <!-- <p class="comment">Technology is the science of arranging life so that one need not experience it.</p> -->
+                </div>
+
+                <div class="spacer"></div>
+
+                <div class="container comment">
+                    <p class="commentNumber">Comment 4</p>
+                    <!-- <p class="comment">...</p> -->
+                    <!-- <p class="comment">Punishment is as likely to harden and corrupt prisoners as it is to reform them.</p> -->
+                </div>
+                
+            </div>
+
+            <div id="userControlsBox">
+
+                <div id="generateCustomCommentsBox">
+                    <p id="instruction">Enter a theme to generate related comments</p>
+                    <input id="userThemeInput" type="text" placeholder="Input a theme">
+                    <button id="generateCustomButton">Generate</button>
+                </div>
+
+                <div id="generateRandomCommentsBox">
+                    <p> OR </p>
+                    <p>Generate comments based on a random theme</p>
+                    <button id="generateRandomButton">Generate</button>
+                </div>
+
+                <div id="timerDisplayBox">
+                    <input id="userTimeInput" type="number" min="1" max="90" placeholder="Set time in minutes">
+                    <p id="countdown">00:00</p>
+                    <button id="startButton">Start</button> <button id="resetButton">Reset</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container" id="textEditorBox">
+
+            <div id="editorButtons">
+                <button id="undoButton">Undo</button><button id="redoButton">Redo</button>
+            </div>
+            
+            <textarea id="editor" placeholder="Click here to begin" spellcheck="false"></textarea>
+            
+            <button id="unlockButton">Unlock editor</button>
+
+        </div>
+
+        <script type="module" src="index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,219 @@
+html, 
+body {
+    margin: 0;
+    padding: 0;
+    color: rgb(50, 50, 50);
+}
+
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+    display: flex;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+#header {
+    height: auto;
+    margin: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: white;
+    background-color: rgb(0, 152, 212);
+    font-size: 22.4px;
+    text-align: center;
+}
+
+#title {
+    margin: auto;
+    margin-top: 1.65vh;
+    margin-bottom: 1.65vh;
+}
+
+#userDisplayBox {
+    width: 1036px;
+    max-width: calc(100% - 30px);
+    height: auto;
+    margin-bottom: 0;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(210, 210, 210);
+}
+
+#generatedCommentsBox {
+    width: 61%;
+    height: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-right: 1px solid rgb(210, 210, 210);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+#theme {
+    font-weight: bold;
+}
+
+.container.comment {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 2vh;
+    display: flex;
+    gap: 100px;
+}
+
+.commentNumber {
+    margin: 0;
+    font-style: italic;
+    text-wrap: nowrap;
+}
+
+.comment {
+    margin: 0;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+#userControlsBox {
+    width: 36%;
+    text-align: center;
+}
+
+#userGeneration {
+    height: auto;
+    padding-left: 16px;
+    padding-right: 16px;   
+}
+
+#instruction {
+    margin-bottom: 0;
+}
+
+#userThemeInput {
+    width: 65%;
+    height: 11%;
+    font-size: 14px;
+    text-align: center;
+}
+
+#generateCustomCommentsBox {
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+#generateRandomCommentsBox {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgb(210, 210, 210);
+}
+
+#generateCustomButton,
+#generateRandomButton {
+    margin: 0;
+    height: 14%;
+    font-size: 14px;
+}
+
+#timerDisplayBox {
+    height: auto;
+    padding-top: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 25px;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+#countdown {
+    margin: 0;
+    font-size: 20px;
+    line-height: 2.4vh;
+}
+
+#userTimeInput {
+    width: 40%;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ? */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#startButton,
+#resetButton {
+    height: 59%;
+    font-size: 14px;
+}
+
+#textEditorBox {
+    width: 1036px;
+    max-width: calc(100% - 30px);
+    height: 524px;
+    margin-top: 0;
+    border: 1px solid rgb(210, 210, 210);
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    flex-direction: column;
+    position: relative;
+}
+
+#editorButtons {
+    margin: 18px;
+    margin-bottom: 0;
+}
+
+#undoButton {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+#redoButton {
+    font-size: 14px;
+}
+
+#editor {
+    height: 88%;
+    margin: 16px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-top: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    resize: none;
+    /* the following parameters make the textarea fit nicely in the div */
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+#unlockButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    display: none;
+}
+
+#unlockButton.show {
+    display: block;
+}

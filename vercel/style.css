@@ -166,7 +166,7 @@ input::-webkit-inner-spin-button {
 #textEditorBox {
     width: 1036px;
     max-width: calc(100% - 30px);
-    height: 524px;
+    height: 500px;
     margin-top: 0;
     border: 1px solid rgb(210, 210, 210);
     border-top: none;

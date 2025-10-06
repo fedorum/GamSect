@@ -1,11 +1,9 @@
 // COMMENT GENERATION
 
-// import { request, response } from "express";
-
 // generates comments related to the user input when the 'generate' button is pressed
 function generateCustom() {
-    let input = document.getElementById("userThemeInput");
-    let theme = input.value;
+    const input = document.getElementById("userThemeInput");
+    const theme = input.value;
     document.getElementById("theme").innerHTML = "Theme: " + capitalise(theme);
     input.value = "";
 
@@ -19,7 +17,7 @@ function generateRandom() {
     // find a way to randomise the theme
     // ?
 
-    let theme = "?";
+    const theme = "?";
     document.getElementById("theme").innerHTML = "Theme: ?";
     
     console.log(theme);
@@ -31,13 +29,13 @@ document.getElementById("generateRandomButton").addEventListener("click", genera
 async function callGemini(theme) {
     // specifying the type of response to be received from gemini
     const requestBody = {
-        // 
+        // initialising the request for the api (i.e. generating comments based on theme)
         contents: [{
             parts: [{
-                text: "Generate a succinct comment, in the style of the ones provided in the GAMSAT section II exam, on the theme of " + theme
+                text: "Generate 4 short and succinct comments in the style of the GAMSAT section II exam on the theme of " + theme
             }]
         }],
-        // 
+        // configuring the number of comments required in the response (i.e. 4)
         generationConfig: {
             responseMimeType: "application/json",
             responseSchema: {
@@ -45,34 +43,72 @@ async function callGemini(theme) {
                 properties: {
                     comment1: {
                         type: "string",
-                        description: "The generated comment"
+                        description: "The first comment"
                     },
                     author1: {
                         type: "string",
-                        description: "The author of the comment"
+                        description: "The author of the first comment"
+                    },
+                    comment2: {
+                        type: "string",
+                        description: "The second comment"
+                    },
+                    author2: {
+                        type: "string",
+                        description: "The author of the second comment"
+                    },
+                    comment3: {
+                        type: "string",
+                        description: "The second comment"
+                    },
+                    author3: {
+                        type: "string",
+                        description: "The author of the second comment"
+                    },
+                    comment4: {
+                        type: "string",
+                        description: "The second comment"
+                    },
+                    author4: {
+                        type: "string",
+                        description: "The author of the second comment"
                     }
-                // insert repeat objects?
                 },
-                required: ["comment", "author"]
+                required: ["comment1", "author1", "comment2", "author2", "comment3", "author3", "comment4", "author4"]
             }
         }
     };
 
-    // the response is received from the backend in the form of 4 comments 
-    const response = await fetch("/api/gemini", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
-    });
-    
-    const data = await response.json();
-    console.log(data.candidates[0].content.parts[0].text);
-    // displaycomments(comments);
+    // the response is received from the backend in the form of 4 comments
+    try {
+        const response = await fetch("/api/gemini", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody),
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const comments = JSON.parse(data.candidates[0].content.parts[0].text);
+        displayComments(comments);
+    }
+
+    // handling errors with the gemini api
+    catch (error) {
+        console.error("Error fetching structured output from Gemini API:", error);
+        return null;
+    }
 }
 
 // displays the generated comments on the screen
-function displaycomments(comments) {
-    
+function displayComments(comments) {
+    console.log(comments.comment1);
+    console.log(comments.comment2);
+    console.log(comments.comment3);
+    console.log(comments.comment4);
 }
 
 // capitalises the first letter of each word in the theme for aesthetics
@@ -98,8 +134,8 @@ var time = 0;
 
 // gets the user inputted time and starts the timer
 function toggleTimer() {
-    let userTime = document.getElementById("userTimeInput").value;
-    let buttonValue = document.getElementById("startButton").innerHTML;
+    const userTime = document.getElementById("userTimeInput").value;
+    const buttonValue = document.getElementById("startButton").innerHTML;
 
     if (buttonValue == "Start") {
         // if the user has inputted a time and if no previous timer has been inputted, process the new time
@@ -149,10 +185,10 @@ function timerInterval() {
 
 // displays the timer on screen
 function displayTime() {
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-    let paddedMins = minutes.toString().padStart(2, "0");
-    let paddedSecs = seconds.toString().padStart(2, "0");
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    const paddedMins = minutes.toString().padStart(2, "0");
+    const paddedSecs = seconds.toString().padStart(2, "0");
     document.getElementById("countdown").innerHTML = paddedMins + ":" + paddedSecs;
 }
 
@@ -165,14 +201,12 @@ function undo() {
     editor.focus();
     document.execCommand("undo", false, null);
 }
-
 document.getElementById("undoButton").addEventListener("click", undo);
 
 function redo() {
     editor.focus();
     document.execCommand("redo", false, null);
 }
-
 document.getElementById("redoButton").addEventListener("click", redo);
 
 // unlocks the editor and hides the 'unlock' button
@@ -180,7 +214,6 @@ function unlock() {
     document.getElementById("editor").disabled = false;
     document.getElementById("unlockButton").classList.remove("show");
 }
-
 document.getElementById("unlockButton").addEventListener("click", unlock);
 
 // TESTING

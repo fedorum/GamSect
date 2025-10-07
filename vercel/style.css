@@ -1,4 +1,6 @@
-html, 
+/* DOCUMENT SETTINGS */
+
+html,
 body {
     margin: 0;
     padding: 0;
@@ -9,12 +11,22 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+button {
+    cursor: pointer;
+}
+
 .container {
     display: flex;
     margin: auto;
     margin-top: 2vh;
     margin-bottom: 2vh;
 }
+
+.spacer {
+    flex-grow: 1;
+}
+
+/* HEADER */
 
 #header {
     height: auto;
@@ -33,6 +45,8 @@ body {
     margin-bottom: 1.65vh;
 }
 
+/* TOP BOX FOR COMMENTS AND USER CONTROLS*/
+
 #userDisplayBox {
     width: 1036px;
     max-width: calc(100% - 30px);
@@ -42,8 +56,10 @@ body {
     border: 1px solid rgb(210, 210, 210);
 }
 
-#generatedCommentsBox {
-    width: 61%;
+/* TOP LEFT BOX FOR COMMENTS*/
+
+#commentsBox {
+    width: 71%;
     height: auto;
     padding: 16px;
     border-right: 1px solid rgb(210, 210, 210);
@@ -58,10 +74,11 @@ body {
 }
 
 .container.comment {
-    text-align: left;
     margin: 0;
+    margin-bottom: 2vh;
     display: flex;
     gap: 100px;
+    text-align: left;
 }
 
 .commentNumber {
@@ -82,98 +99,153 @@ body {
     text-wrap: nowrap;
 }
 
-.spacer {
-    flex-grow: 1;
-}
-
-#userControlsBox {
-    width: 36%;
-    text-align: center;
-}
-
-#userGeneration {
-    height: auto;
-    padding-left: 16px;
-    padding-right: 16px;   
-}
-
-#instruction {
+#author4 {
     margin-bottom: 0;
 }
 
-#userThemeInput {
-    width: 65%;
-    height: 11%;
-    font-size: 14px;
+/* BOX FOR USER INPUT (THEME, TIMER) */
+
+#controlsBox {
+    width: 26%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
 }
 
-#generateCustomCommentsBox {
-    margin: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
+/* PANEL FOR THEME INPUT */
+
+#generatePanel {
+    padding: 16px;
 }
 
-#generateRandomCommentsBox {
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid rgb(210, 210, 210);
+#generatePanel p {
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+#userThemeInput {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
 #generateCustomButton,
 #generateRandomButton {
-    margin: 0;
-    height: 14%;
-    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    padding: 4px;
+    color: white;
+    border-radius: 4px;
 }
 
-#timerDisplayBox {
-    height: auto;
-    padding-top: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 25px;
-    text-align: left;
+#generateCustomButton {
+    margin-bottom: 16px;
+    background-color: rgb(1, 170, 1);
+    border: 1px solid rgb(0, 150, 0);
+    box-shadow: 0 3px rgb(0, 160, 0);
+}
+
+#generateCustomButton:hover {
+    background-color: rgb(0, 160, 0);
+}
+
+#generateCustomButton:active {
+    box-shadow: 0 2px rgb(0, 150, 0);
+    transform: translateY(1px);
+}
+
+#generateRandomButton {
+    background-color: rgb(0, 150, 209);
+    border: 1px solid rgb(0, 130, 182);
+    box-shadow: 0 3px rgb(0, 140, 196);
+}
+
+#generateRandomButton:hover {
+    background-color: rgb(0, 140, 196);
+}
+
+#generateRandomButton:active {
+    box-shadow: 0 2px rgb(0, 130, 182);
+    transform: translateY(1px);
+}
+
+#border {
+    margin: 1px 0;
+    border: none;
+    border-bottom: 1px solid rgb(210, 210, 210);
+}
+
+/* PANEL FOR TIMER INPUT */
+
+#timerPanel {
+    margin: 0;
+    padding: 16px;
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
     justify-content: center;
-}
-
-#countdown {
-    margin: 0;
-    font-size: 20px;
-    line-height: 2.4vh;
+    gap: 16px;
 }
 
 #userTimeInput {
-    width: 40%;
+    height: fit-content;
     font-size: 13px;
     text-align: center;
 }
 
-/* ? */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 #startButton,
 #resetButton {
-    height: 59%;
-    font-size: 14px;
+    height: fit-content;
+    color: white;
+    border-radius: 4px;
 }
 
-#textEditorBox {
+#startButton {
+    background-color: rgb(240, 0, 0);
+    border: 1px solid rgb(220, 0, 0);
+    box-shadow: 0 3px rgb(230, 0, 0);
+}
+
+#startButton:hover {
+    background-color: rgb(230, 0, 0);
+}
+
+#startButton:active {
+    box-shadow: 0 2px rgb(220, 0, 0);
+    transform: translateY(1px);
+}
+
+#resetButton {
+    background-color: rgb(250, 162, 0);
+    border: 1px solid rgb(230, 149, 0);
+    box-shadow: 0 3px rgb(240, 156, 0);
+}
+
+#resetButton:hover {
+    background-color: rgb(240, 156, 0);
+}
+
+#resetButton:active {
+    box-shadow: 0 2px rgb(230, 149, 0);
+    transform: translateY(1px);
+}
+
+#countdown {
+    margin: 0;
+    margin-bottom: 0;
+    font-size: 20px;
+    line-height: 2.4vh;
+}
+
+/* TEXT EDITOR */
+
+#editorBox {
     width: 1036px;
     max-width: calc(100% - 30px);
-    height: 500px;
+    height: 536px;
     margin-top: 0;
     border: 1px solid rgb(210, 210, 210);
     border-top: none;
@@ -183,18 +255,41 @@ input::-webkit-inner-spin-button {
     position: relative;
 }
 
-#editorButtons {
-    margin: 18px;
+#editorControls {
+    margin: 16px;
     margin-bottom: 0;
+    display: flex;
+}
+
+#undoButton,
+#redoButton {
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 4px;
+    box-shadow: 0 3px rgb(235, 235, 235);
+    font-size: 14px;
 }
 
 #undoButton {
     margin-right: 10px;
-    font-size: 14px;
 }
 
-#redoButton {
-    font-size: 14px;
+#undoButton:hover,
+#redoButton:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+#undoButton:active,
+#redoButton:active {
+    box-shadow: 0 2px rgb(220, 220, 220);
+    transform: translateY(1px);
+}
+
+/* ? */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #editor {
@@ -217,7 +312,6 @@ input::-webkit-inner-spin-button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 14px;
     display: none;
 }
 

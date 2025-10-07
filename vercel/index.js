@@ -32,7 +32,10 @@ async function callGemini(theme) {
         // initialising the request for the api (i.e. generating comments based on theme)
         contents: [{
             parts: [{
-                text: "You are a setter for section II of the GAMSAT exam. Generate 4 short, simple, and succinct comments in the style of the exam on the theme of " + theme
+                text: `You are a setter for section II of the GAMSAT exam. \ 
+                       Find or generate 4 short, simple, and succinct comments in the style of the exam on the theme of ${theme}. \
+                       If possible, comments should come from notable authors. If not, do not include any author for the specific comment.
+                       Only include the full names of the authors, and not their professions or positions.`
             }]
         }],
         // configuring the number of comments required in the response (i.e. 4)
@@ -113,6 +116,7 @@ function displayComments(comments) {
     document.getElementById("author2").innerHTML = comments.author2;
     document.getElementById("author3").innerHTML = comments.author3;
     document.getElementById("author4").innerHTML = comments.author4;
+    // document.getElementById("author4").classList.add("change");
 }
 
 // capitalises the first letter of each word in the theme for aesthetics

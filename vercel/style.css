@@ -91,6 +91,29 @@ button {
     margin: 0;
 }
 
+/* span {
+    opacity: 0;
+    animation: fade 2s ease-in-out forwards;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+} */
+
+.fadeIn {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.fadeIn.visible {
+    opacity: 1;
+}
+
 .author {
     margin: 0;
     margin-bottom: 2vh;
@@ -130,6 +153,7 @@ button {
     margin-right: auto;
     margin-bottom: 16px;
     text-align: center;
+    font-size: 14px;
 }
 
 #generateCustomButton,
@@ -138,24 +162,37 @@ button {
     margin-right: auto;
     margin-bottom: 0;
     padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
     color: white;
     border-radius: 4px;
 }
 
 #generateCustomButton {
     margin-bottom: 16px;
-    background-color: rgb(1, 170, 1);
+    background-color: rgb(0, 170, 0);
     border: 1px solid rgb(0, 150, 0);
     box-shadow: 0 3px rgb(0, 160, 0);
 }
 
 #generateCustomButton:hover {
     background-color: rgb(0, 160, 0);
+    border: 1px solid rgb(0, 140, 0);
 }
 
-#generateCustomButton:active {
+#generateCustomButton:active,
+#generateCustomButton.active {
     box-shadow: 0 2px rgb(0, 150, 0);
     transform: translateY(1px);
+}
+
+#generateCustomButton.active {
+    cursor: not-allowed;
+}
+
+#generateCustomButton.active:hover {
+    background-color: rgb(0, 170, 0);
+    border: 1px solid rgb(0, 150, 0);
 }
 
 #generateRandomButton {
@@ -166,11 +203,22 @@ button {
 
 #generateRandomButton:hover {
     background-color: rgb(0, 140, 196);
+    border: 1px solid rgb(0, 130, 182);
 }
 
-#generateRandomButton:active {
+#generateRandomButton:active,
+#generateRandomButton.active {
     box-shadow: 0 2px rgb(0, 130, 182);
     transform: translateY(1px);
+}
+
+#generateRandomButton.active {
+    cursor: not-allowed;
+}
+
+#generateRandomButton.active:hover {
+    background-color: rgb(0, 150, 209);
+    border: 1px solid rgb(0, 130, 182);
 }
 
 #border {
@@ -187,13 +235,20 @@ button {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
 }
 
 #userTimeInput {
     height: fit-content;
-    font-size: 13px;
+    font-size: 14px;
     text-align: center;
+}
+
+#countdown {
+    margin: 0;
+    margin-bottom: 0;
+    font-size: 22px;
+    line-height: 2.4vh;
 }
 
 #startButton,
@@ -201,16 +256,18 @@ button {
     height: fit-content;
     color: white;
     border-radius: 4px;
+    font-size: 14px;
 }
 
 #startButton {
-    background-color: rgb(240, 0, 0);
+    background-color: rgb(250, 0, 0);
     border: 1px solid rgb(220, 0, 0);
     box-shadow: 0 3px rgb(230, 0, 0);
 }
 
 #startButton:hover {
     background-color: rgb(230, 0, 0);
+    border: 1px solid rgb(210, 0, 0);
 }
 
 #startButton:active {
@@ -226,6 +283,7 @@ button {
 
 #resetButton:hover {
     background-color: rgb(240, 156, 0);
+    border: 1px solid rgb(230, 149, 0);
 }
 
 #resetButton:active {
@@ -233,19 +291,12 @@ button {
     transform: translateY(1px);
 }
 
-#countdown {
-    margin: 0;
-    margin-bottom: 0;
-    font-size: 20px;
-    line-height: 2.4vh;
-}
-
 /* TEXT EDITOR */
 
 #editorBox {
     width: 1036px;
     max-width: calc(100% - 30px);
-    height: 536px;
+    height: 516px;
     margin-top: 0;
     border: 1px solid rgb(210, 210, 210);
     border-top: none;
@@ -263,10 +314,13 @@ button {
 
 #undoButton,
 #redoButton {
-    background-color: rgb(245, 245, 245);
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: rgb(240, 240, 240);
     border: 1px solid rgb(210, 210, 210);
     border-radius: 4px;
-    box-shadow: 0 3px rgb(235, 235, 235);
+    box-shadow: 0 3px rgb(230, 230, 230);
     font-size: 14px;
 }
 
@@ -276,7 +330,8 @@ button {
 
 #undoButton:hover,
 #redoButton:hover {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(230, 230, 230);
+    border: 1px solid rgb(200, 200, 200)
 }
 
 #undoButton:active,

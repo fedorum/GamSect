@@ -1,10 +1,12 @@
 // COMMENT GENERATION
 
+var theme;
+
 // generates comments related to the user input when the 'generate' button is pressed
 async function generateCustom() {
     const button = document.getElementById("generateCustomButton");
     const input = document.getElementById("userThemeInput");
-    const theme = input.value;
+    theme = input.value;
     input.disabled = true;
     button.disabled = true;
     button.classList.add("active");
@@ -12,7 +14,7 @@ async function generateCustom() {
     console.log(theme);
     await callGemini(theme);
     
-    document.getElementById("theme").innerHTML = "Theme: " + capitalise(theme);
+    // document.getElementById("theme").innerHTML = "Theme: " + capitalise(theme);
     button.classList.remove("active");
     button.disabled = false;
     input.disabled = false;
@@ -24,7 +26,7 @@ document.getElementById("generateCustomButton").addEventListener("click", genera
 async function generateRandom() {
     // find a way to randomise the theme
     // ?
-    const theme = "?";
+    theme = "?";
     const button = document.getElementById("generateRandomButton");
     button.classList.add("active");
     
@@ -107,7 +109,7 @@ async function callGemini(theme) {
 
         const data = await response.json();
         const comments = JSON.parse(data.candidates[0].content.parts[0].text);
-        displayComments(comments);
+        displayGeneration(comments);
     }
 
     // handling errors with the gemini api
@@ -118,44 +120,37 @@ async function callGemini(theme) {
 }
 
 // displays the generated comments on the screen
-function displayComments(comments) {
-    fadeIn(1, comments.comment1, comments.author1);
-    fadeIn(2, comments.comment2, comments.author2);
-    fadeIn(3, comments.comment3, comments.author3);
-    fadeIn(4, comments.comment4, comments.author4);
+function displayGeneration(comments) {
+    updateSpan("generatedTheme", theme);
 
-    // document.getElementById("comment1").innerHTML = comments.comment1;
-    // document.getElementById("comment2").innerHTML = comments.comment2;
-    // document.getElementById("comment3").innerHTML = comments.comment3;
-    // document.getElementById("comment4").innerHTML = comments.comment4;
-    // document.getElementById("author1").innerHTML = comments.author1;
-    // document.getElementById("author2").innerHTML = comments.author2;
-    // document.getElementById("author3").innerHTML = comments.author3;
-    // document.getElementById("author4").innerHTML = comments.author4;
+    updateSpan("comment1", comments.comment1);
+    updateSpan("comment2", comments.comment2);
+    updateSpan("comment3", comments.comment3);
+    updateSpan("comment4", comments.comment4);
+
+    updateSpan("author1", comments.author1);
+    updateSpan("author2", comments.author2);
+    updateSpan("author3", comments.author3);
+    updateSpan("author4", comments.author4);
 }
 
 // 
-function fadeIn(number, commentText, authorText) {
-    const commentNumber = "comment" + number;
-    const authorNumber = "author" + number;
-    const comment = document.getElementById(commentNumber);
-    const author = document.getElementById(authorNumber);
-    author.innerHTML = "";
+function updateSpan(spanNumber, spanText) {
+    const span = document.getElementById(spanNumber);
+    span.style.opacity = 0;
+    span.style.transition = "none";
+    
+    if (spanNumber == "generatedTheme") {
+        span.textContent = capitalise(spanText);
+    }
+    else {
+        span.textContent = spanText;
+    }
 
-    const commentSpan = document.createElement("commentSpan");
-    commentSpan.classList.add("fadeIn");
-    commentSpan.textContent = commentText;
-    comment.appendChild(commentSpan);
+    void span.offsetWidth;
 
-    const authorSpan = document.createElement("authorSpan");
-    authorSpan.classList.add("fadeIn");
-    authorSpan.textContent = authorText;
-    author.appendChild(authorSpan);
-
-    requestAnimationFrame(() => {
-        commentSpan.classList.add("visible");
-        authorSpan.classList.add("visible");
-    });
+    span.style.transition = "opacity 1s ease-in-out";
+    span.style.opacity = 1;
 }
 
 // capitalises the first letter of each word in the theme for aesthetics
@@ -263,7 +258,7 @@ function unlock() {
 }
 document.getElementById("unlockButton").addEventListener("click", unlock);
 
-// disabling the paste function
+// disabling the paste and cut functions
 
 function disableFunctions() {
     const textarea = document.getElementById("editor");

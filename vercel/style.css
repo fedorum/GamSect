@@ -58,9 +58,14 @@ span {
     margin-bottom: 0;
     background-color: rgb(245, 245, 245);
     border: 1px solid rgb(210, 210, 210);
+    overflow: hidden;
 }
 
-/* TOP LEFT BOX FOR COMMENTS*/
+#userDisplayBox.resize {
+    transition: height 1s ease-in-out;
+}
+
+/* BOX FOR COMMENTS*/
 
 #commentsBox {
     width: 71%;

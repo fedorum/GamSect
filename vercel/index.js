@@ -121,6 +121,10 @@ async function callGemini(theme) {
 
 // displays the generated comments on the screen
 function displayGeneration(comments) {
+    const displayBox = document.getElementById("userDisplayBox");
+    const startHeight = displayBox.offsetHeight;
+    console.log("start height: " + startHeight);
+
     updateSpan("generatedTheme", theme);
 
     updateSpan("comment1", comments.comment1);
@@ -132,6 +136,25 @@ function displayGeneration(comments) {
     updateSpan("author2", comments.author2);
     updateSpan("author3", comments.author3);
     updateSpan("author4", comments.author4);
+
+    const endHeight = displayBox.offsetHeight;
+    console.log("end height: " + endHeight);
+
+    displayBox = startHeight + "px";
+    displayBox.classList.add("resize");
+
+    void displayBox.offsetHeight;
+
+    displayBox.style.height = endHeight + "px";
+
+    displayBox.addEventListener(
+        "resized",
+        () => {
+            displayBox.classList.remove("resize");
+            displayBox.style.height = "auto";
+        },
+        { once: true }
+    );
 }
 
 // 

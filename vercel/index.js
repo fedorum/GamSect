@@ -1,24 +1,20 @@
 // COMMENT GENERATION
 
-var theme;
-
 // generates comments related to the user input when the 'generate' button is pressed
 async function generateCustom() {
-    const button = document.getElementById("generateCustomButton");
     const input = document.getElementById("userThemeInput");
-    theme = input.value;
+    const theme = input.value;
+    updateSpan("generatedTheme", theme);
+    disableButton(this);
     input.disabled = true;
-    button.disabled = true;
-    button.classList.add("active");
 
-    console.log(theme);
-    await callGemini(theme);
+    // await callGemini(theme);
     
-    // document.getElementById("theme").innerHTML = "Theme: " + capitalise(theme);
-    button.classList.remove("active");
-    button.disabled = false;
-    input.disabled = false;
-    input.value = "";
+    setTimeout(() => {
+        enableButton(this);
+        input.disabled = false;
+        input.value = "";
+    }, 5000);
 }
 document.getElementById("generateCustomButton").addEventListener("click", generateCustom);
 
@@ -26,17 +22,71 @@ document.getElementById("generateCustomButton").addEventListener("click", genera
 async function generateRandom() {
     // find a way to randomise the theme
     // ?
-    theme = "?";
-    const button = document.getElementById("generateRandomButton");
-    button.classList.add("active");
+    const theme = "?";
+    updateSpan("generatedTheme", "?");
+    disableButton(this);
     
-    console.log(theme);
     // await callGemini(theme);
 
-    document.getElementById("theme").innerHTML = "Theme: ?";
-    button.classList.remove("active");
+    setTimeout(() => {
+        enableButton(this);
+    }, 5000);
 }
 document.getElementById("generateRandomButton").addEventListener("click", generateRandom);
+
+// reroll function
+function reroll() {
+
+}
+
+// 
+function disableButton(button) {
+    button.disabled = true;
+    button.classList.add("active");
+    
+    resizeButton(button, "Generating");
+    
+    const loaderSpan = button.children[1];
+    loaderSpan.classList.add("active");
+}
+
+// 
+function enableButton(button) {
+    const loaderSpan = button.children[1];
+    loaderSpan.classList.remove("active");
+
+    resizeButton(button, "Generate");
+
+    button.classList.remove("active");
+    button.disabled = false;
+}
+
+// 
+function resizeButton(button, textChange) {
+    const startWidth = button.offsetWidth;
+
+    // add width change text here
+    const generateSpan = button.children[0];
+    generateSpan.innerHTML = textChange;
+
+    const endWidth = button.offsetWidth;
+
+    button.style.width = startWidth + "px";
+    button.classList.add("resize");
+
+    void button.offsetWidth;
+
+    button.style.width = endWidth + "px";
+
+    const onTransitionEnd = (e) => {
+        if (e.propertyName === "width") {
+            button.classList.remove("resize");
+            button.style.width = "auto";
+            button.removeEventListener("transitionend", onTransitionEnd);
+        }
+    };
+    button.addEventListener("transitionend", onTransitionEnd);
+}
 
 // sends a request to the backend to call the gemini api to generate comments
 async function callGemini(theme) {
@@ -45,9 +95,9 @@ async function callGemini(theme) {
         // initialising the request for the api (i.e. generating comments based on theme)
         contents: [{
             parts: [{
-                text: `You are a setter for section II of the GAMSAT exam. \ 
+                text: `You are a setter for section II of the GAMSAT exam. \
                        Find or generate 4 short, simple, and succinct comments in the style of the exam on the theme of ${theme}. \
-                       If possible, comments should come from notable authors. If not, do not include any author for the specific comment.
+                       If possible, comments should come from notable authors. If not, do not include any author for the specific comment. \
                        Only include the full names of the authors, and not their professions or positions.`
             }]
         }],
@@ -123,9 +173,6 @@ async function callGemini(theme) {
 function displayGeneration(comments) {
     const displayBox = document.getElementById("userDisplayBox");
     const startHeight = displayBox.offsetHeight;
-    console.log("start height: " + startHeight);
-
-    updateSpan("generatedTheme", theme);
 
     updateSpan("comment1", comments.comment1);
     updateSpan("comment2", comments.comment2);
@@ -138,32 +185,35 @@ function displayGeneration(comments) {
     updateSpan("author4", comments.author4);
 
     const endHeight = displayBox.offsetHeight;
-    console.log("end height: " + endHeight);
 
-    displayBox = startHeight + "px";
+    if (endHeight == startHeight) {
+        return;
+    }
+
+    displayBox.style.height = startHeight + "px";
     displayBox.classList.add("resize");
 
     void displayBox.offsetHeight;
 
     displayBox.style.height = endHeight + "px";
 
-    displayBox.addEventListener(
-        "resized",
-        () => {
+    const onTransitionEnd = (e) => {
+        if (e.propertyName === "height") {
             displayBox.classList.remove("resize");
             displayBox.style.height = "auto";
-        },
-        { once: true }
-    );
+            displayBox.removeEventListener("transitionend", onTransitionEnd);
+        }
+    };
+    displayBox.addEventListener("transitionend", onTransitionEnd);
 }
 
 // 
-function updateSpan(spanNumber, spanText) {
-    const span = document.getElementById(spanNumber);
+function updateSpan(spanIdentifier, spanText) {
+    const span = document.getElementById(spanIdentifier);
     span.style.opacity = 0;
     span.style.transition = "none";
     
-    if (spanNumber == "generatedTheme") {
+    if (spanIdentifier == "generatedTheme") {
         span.textContent = capitalise(spanText);
     }
     else {

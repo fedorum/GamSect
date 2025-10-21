@@ -14,7 +14,7 @@ async function generateCustom() {
         enableButton(this);
         input.disabled = false;
         input.value = "";
-    }, 5000);
+    }, 3000);
 }
 document.getElementById("generateCustomButton").addEventListener("click", generateCustom);
 
@@ -30,7 +30,7 @@ async function generateRandom() {
 
     setTimeout(() => {
         enableButton(this);
-    }, 5000);
+    }, 3000);
 }
 document.getElementById("generateRandomButton").addEventListener("click", generateRandom);
 
@@ -55,10 +55,10 @@ function enableButton(button) {
     const loaderSpan = button.children[1];
     loaderSpan.classList.remove("active");
 
-    resizeButton(button, "Generate");
-
     button.classList.remove("active");
     button.disabled = false;
+
+    resizeButton(button, "Generate");
 }
 
 // 
@@ -147,7 +147,7 @@ async function callGemini(theme) {
 
     // the response is received from the backend in the form of 4 comments
     try {
-        const response = await fetch("/api/gemini", {
+        const response = await fetch("/api/server", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),

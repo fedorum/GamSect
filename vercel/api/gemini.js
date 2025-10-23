@@ -1,4 +1,4 @@
-// GEMINI API CALLS
+// VERCEL SERVER FOR GEMINI API CALLS
 
 // importing modules to obtain the api key from the .env.local file
 import { config } from 'dotenv';
@@ -46,7 +46,3 @@ export default async function handler(req, res) {
     }
 
 };
-
-// POSTGRESQL DATABASE CONNECTION
-
-

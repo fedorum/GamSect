@@ -9,7 +9,7 @@ import path from 'path';
 // changing the file path of the dotenv config to the env file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-config({ path: path.join(__dirname, '../../.env.local') });
+config({ path: path.join(__dirname, '../.env.local') });
 
 // variables for the api key, model, and api endpoint (url) used in the call
 const apiKey = process.env.GEMINI_API_KEY;

@@ -8,13 +8,17 @@ async function generateCustom() {
     disableButton(this);
     input.disabled = true;
 
+    // check if user theme is in database and retrieve the corresponding group of comments
+    // if user theme does not exist, call gemini to generate and store in database after
+
     // await callGemini(theme);
+    getThemesFromDatabase();
     
     setTimeout(() => {
         enableButton(this);
         input.disabled = false;
         input.value = "";
-    }, 5000);
+    }, 3000);
 }
 document.getElementById("generateCustomButton").addEventListener("click", generateCustom);
 
@@ -26,20 +30,24 @@ async function generateRandom() {
     updateSpan("generatedTheme", "?");
     disableButton(this);
     
+    // check if user theme is in database and retrieve the corresponding group of comments
+    // if user theme does not exist, call gemini to generate and store in database after
+
     // await callGemini(theme);
 
     setTimeout(() => {
         enableButton(this);
-    }, 5000);
+    }, 3000);
 }
 document.getElementById("generateRandomButton").addEventListener("click", generateRandom);
 
 // reroll function
 function reroll() {
-
+    // check database for another group of comments
+    // if no have, ask gemini to generate more and store accordingly
 }
 
-// 
+// re-styles the button and prevents it from being clicked
 function disableButton(button) {
     button.disabled = true;
     button.classList.add("active");
@@ -50,7 +58,7 @@ function disableButton(button) {
     loaderSpan.classList.add("active");
 }
 
-// 
+// re-styles the button and allows it to be clicked again
 function enableButton(button) {
     const loaderSpan = button.children[1];
     loaderSpan.classList.remove("active");
@@ -61,7 +69,7 @@ function enableButton(button) {
     button.disabled = false;
 }
 
-// 
+// re-styles the button and changes the text
 function resizeButton(button, textChange) {
     const startWidth = button.offsetWidth;
 
@@ -86,6 +94,35 @@ function resizeButton(button, textChange) {
         }
     };
     button.addEventListener("transitionend", onTransitionEnd);
+}
+
+// calling the database for themes (if any)
+async function getThemesFromDatabase() {
+    try {
+        const response = await fetch("/api/server", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: "database",
+                action: "getThemes"
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // data is presented as a list, with the first index being the first entry
+        const data = await response.json();
+        console.log(data[0].id + ": " + data[0].theme);
+        
+    }
+
+    // handling errors with the prisma database
+    catch (error) {
+        console.error("Error fetching themes from Prisma Database:", error);
+        return null;
+    }
 }
 
 // sends a request to the backend to call the gemini api to generate comments
@@ -147,7 +184,7 @@ async function callGemini(theme) {
 
     // the response is received from the backend in the form of 4 comments
     try {
-        const response = await fetch("/api/gemini", {
+        const response = await fetch("/api/server", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),

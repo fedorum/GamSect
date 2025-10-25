@@ -11,9 +11,13 @@ generator client {
 }
 
 // Example data model
-model User {
+model Themes {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
+  theme     String   @unique
+}
+
+model Comments {
+  comment   String   @unique
+  author    String   @unique
+  id        Int     @id
 }

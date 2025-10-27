@@ -1,45 +1,43 @@
 // COMMENT GENERATION
 
 // generates comments related to the user input when the 'generate' button is pressed
-async function generateCustom() {
-    const input = document.getElementById("userThemeInput");
-    const theme = input.value;
-    updateSpan("generatedTheme", theme);
+async function generate() {
+    var input = document.getElementById("userThemeInput");
+    var theme;
+
+    if (this.id == "generateCustomButton") {
+        theme = capitalise(input.value);
+        updateSpan("generatedTheme", theme);
+    }
+    else if (this.id == "generateRandomButton") {
+        // random generation
+        theme = "?";
+
+        updateSpan("generatedTheme", "?");
+    }
+
     disableButton(this);
     input.disabled = true;
 
     // check if user theme is in database and retrieve the corresponding group of comments
+    var comments = await findThemeInDatabase(theme);
     // if user theme does not exist, call gemini to generate and store in database after
+    if (comments != null) {
+        comments = formatJSON(comments);
+    }
+    else {
+        console.log("Theme does not exist in database");
+        comments = await callGemini(theme);
+        // storeThemeInDatabase(theme, comments);
+    }
 
-    // await callGemini(theme);
-    getThemesFromDatabase();
-    
-    setTimeout(() => {
-        enableButton(this);
-        input.disabled = false;
-        input.value = "";
-    }, 3000);
+    displayGeneration(comments);
+    enableButton(this);
+    input.disabled = false;
+    input.value = "";
 }
-document.getElementById("generateCustomButton").addEventListener("click", generateCustom);
-
-// generates random comments when the 'generate' button is pressed
-async function generateRandom() {
-    // find a way to randomise the theme
-    // ?
-    const theme = "?";
-    updateSpan("generatedTheme", "?");
-    disableButton(this);
-    
-    // check if user theme is in database and retrieve the corresponding group of comments
-    // if user theme does not exist, call gemini to generate and store in database after
-
-    // await callGemini(theme);
-
-    setTimeout(() => {
-        enableButton(this);
-    }, 3000);
-}
-document.getElementById("generateRandomButton").addEventListener("click", generateRandom);
+document.getElementById("generateCustomButton").addEventListener("click", generate);
+document.getElementById("generateRandomButton").addEventListener("click", generate);
 
 // reroll function
 function reroll() {
@@ -96,15 +94,15 @@ function resizeButton(button, textChange) {
     button.addEventListener("transitionend", onTransitionEnd);
 }
 
-// calling the database for themes (if any)
-async function getThemesFromDatabase() {
+// 
+async function findThemeInDatabase(theme) {
     try {
         const response = await fetch("/api/server", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 type: "database",
-                action: "getThemes"
+                theme: theme
             })
         });
         
@@ -112,18 +110,59 @@ async function getThemesFromDatabase() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        // data is presented as a list, with the first index being the first entry
-        const data = await response.json();
-        console.log(data[0].id + ": " + data[0].theme);
-        
+        const comments = await response.json();
+        return comments;
     }
 
     // handling errors with the prisma database
     catch (error) {
-        console.error("Error fetching themes from Prisma Database:", error);
+        console.error("Error fetching data from Prisma Database:", error);
         return null;
     }
 }
+
+// format
+function formatJSON(comments) {
+    const commentsJSON = {
+        "comment1": comments[0].comment,
+        "comment2": comments[1].comment,
+        "comment3": comments[2].comment,
+        "comment4": comments[3].comment,
+        "author1": comments[0].author,
+        "author2": comments[1].author,
+        "author3": comments[2].author,
+        "author4": comments[3].author
+    };
+    return commentsJSON;
+}
+
+// calling the database for themes (if any)
+// async function storeThemeInDatabase() {
+//     try {
+//         const response = await fetch("/api/server", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({
+//                 type: "database",
+//                 action: "getThemes"
+//             })
+//         });
+        
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
+
+//         // data is presented as a list, with the first index being the first entry
+//         const data = await response.json();
+//         console.log(data[0].id + ": " + data[0].theme);
+//     }
+
+//     // handling errors with the prisma database
+//     catch (error) {
+//         console.error("Error fetching themes from Prisma Database:", error);
+//         return null;
+//     }
+// }
 
 // sends a request to the backend to call the gemini api to generate comments
 async function callGemini(theme) {
@@ -196,7 +235,8 @@ async function callGemini(theme) {
 
         const data = await response.json();
         const comments = JSON.parse(data.candidates[0].content.parts[0].text);
-        displayGeneration(comments);
+        // displayGeneration(comments);
+        return comments;
     }
 
     // handling errors with the gemini api
@@ -250,12 +290,7 @@ function updateSpan(spanIdentifier, spanText) {
     span.style.opacity = 0;
     span.style.transition = "none";
     
-    if (spanIdentifier == "generatedTheme") {
-        span.textContent = capitalise(spanText);
-    }
-    else {
-        span.textContent = spanText;
-    }
+    span.textContent = spanText;
 
     void span.offsetWidth;
 

@@ -39,8 +39,27 @@ async function handleDatabase(req, res) {
         //     // case for saving comments to specific theme
         // }
 
-        const themes = await prisma.themes.findMany();
-        return res.status(200).json(themes);
+        // find requested theme in database (this is a json object)
+        const theme = await prisma.theme.findUnique({
+            where: {
+                theme: req.body.theme
+            }
+        });
+        
+        // 
+        if (theme == null) {
+            console.log("null");
+            return res.status(200).send("Theme does not exist in database, will call Gemini instead");
+        }
+
+        // else, group of 4 comments returned to be displayed
+        const comments = await prisma.comment.findMany({
+            where: {
+                themeId: theme.id,
+                group: 1
+            }
+        });
+        return res.status(200).json(comments);
     }
 
     catch (error) {
@@ -69,7 +88,6 @@ const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:ge
 
 // req (request) and res (response) are object names that automatically communicate with the client
 async function handleGemini(req, res) {
-    console.log("handleGemini hit!");
     try {
         console.log("Awaiting gemini response ...");
         // sending a request to the api when the frontend calls for it and returning the response to the frontend
@@ -88,5 +106,4 @@ async function handleGemini(req, res) {
         console.error(err);
         return res.status(500).json({ error: "Failed to call Gemini API" });
     }
-
-};
+}

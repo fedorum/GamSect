@@ -1,23 +1,23 @@
-// Define database connection via the `DATABASE_URL` env var
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Define custom output path for generated Prisma Client
-generator client {
-  provider = "prisma-client-js"
-  output   = "/app/generated/prisma-client"
+model Theme {
+  id       Int       @id @default(autoincrement())
+  theme    String    @unique
+  comments Comment[]
 }
 
-// Example data model
-model Themes {
-  id        Int      @id @default(autoincrement())
-  theme     String   @unique
-}
-
-model Comments {
-  comment   String   @unique
-  author    String   @unique
-  id        Int     @id
+model Comment {
+  id      Int     @id @default(autoincrement())
+  group   Int
+  comment String  @unique
+  author  String?
+  themeId Int
+  theme   Theme   @relation(fields: [themeId], references: [id])
 }

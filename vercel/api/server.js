@@ -21,6 +21,9 @@ export default async function handler(req, res) {
 
 // importing the prisma client to use its commands to access the database
 import { PrismaClient } from '@prisma/client';
+// import { withRandom } from '@prisma-extension-random';
+
+// const prisma = new PrismaClient().$extends(withRandom());
 const prisma = new PrismaClient();
 
 // handler function for database requests (finding a theme, storing a theme)
@@ -28,7 +31,7 @@ async function handleDatabase(req, res) {
     try {
         switch (req.body.action) {
             // finds the requested theme in the database and returns it
-            case 'findTheme':
+            case 'getComments':
                 const theme = await prisma.theme.findUnique({
                     where: {
                         theme: req.body.theme
@@ -50,19 +53,28 @@ async function handleDatabase(req, res) {
                 return res.status(200).json(comments);
             
             // stores a theme and its related comments in the database
-            case 'storeTheme':
-                await prisma.theme.create({
-                    data: {
-                        theme: req.body.theme
-                    }
-                })
-
-                // retrieves the theme's id as set by the database
-                const storedTheme = await prisma.theme.findUnique({
+            case 'storeComments':
+                var storedTheme = await prisma.theme.findUnique({
                     where: {
                         theme: req.body.theme
                     }
-                })
+                });
+
+                // if theme does not exist, create an entry
+                if (storedTheme == null) {
+                    await prisma.theme.create({
+                        data: {
+                            theme: req.body.theme
+                        }
+                    });
+                    // retrieves the theme's id as set by the database
+                    storedTheme = await prisma.theme.findUnique({
+                        where: {
+                            theme: req.body.theme
+                        }
+                    });
+                }
+
                 const themeId = storedTheme.id;
                 const commentsStored = req.body.comments;
                 
@@ -74,8 +86,8 @@ async function handleDatabase(req, res) {
                         { group: 1, comment: commentsStored.comment3, author: commentsStored.author3, themeId: themeId },
                         { group: 1, comment: commentsStored.comment4, author: commentsStored.author4, themeId: themeId }
                     ]
-                })
-                return res.status(200).send("New theme and comments stored in database!");;
+                });
+                return res.status(200).send("New theme and comments stored in database!");
         }
     }
 
@@ -114,8 +126,8 @@ async function handleGemini(req, res) {
             body: JSON.stringify(req.body),
         });
         // receiving the prompts from gemini and sending it to the frontend
-        const prompts = await response.json();
-        return res.status(200).json(prompts);
+        const comments = await response.json();
+        return res.status(200).json(comments);
     }
 
     // catching the error when the request is not sent

@@ -23,43 +23,60 @@ export default async function handler(req, res) {
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-// 
+// handler function for database requests (finding a theme, storing a theme)
 async function handleDatabase(req, res) {
     try {
-        // SOMETHING WRONG WITH CASE?
-        // console.log(req.body);
-        // const action = req.body;
-    
-        // switch (action) {
-        //     case 'getThemes':
-        //         console.log("getThemes hit!");
-        //         const themes = await prisma.themes.findMany();
-        //         console.log(themes);
-        //         return res.status(200).json(themes);
-        //     // case for saving comments to specific theme
-        // }
-
-        // find requested theme in database (this is a json object)
-        const theme = await prisma.theme.findUnique({
-            where: {
-                theme: req.body.theme
-            }
-        });
+        switch (req.body.action) {
+            // finds the requested theme in the database and returns it
+            case 'findTheme':
+                const theme = await prisma.theme.findUnique({
+                    where: {
+                        theme: req.body.theme
+                    }
+                });
+                
+                // if theme does not exist in database, return null
+                if (theme == null) {
+                    return res.status(200).send("Theme does not exist in database, will call Gemini instead");
+                }
         
-        // 
-        if (theme == null) {
-            console.log("null");
-            return res.status(200).send("Theme does not exist in database, will call Gemini instead");
-        }
+                // else, group of 4 comments are returned to be displayed
+                const comments = await prisma.comment.findMany({
+                    where: {
+                        themeId: theme.id,
+                        group: 1
+                    }
+                });
+                return res.status(200).json(comments);
+            
+            // stores a theme and its related comments in the database
+            case 'storeTheme':
+                await prisma.theme.create({
+                    data: {
+                        theme: req.body.theme
+                    }
+                })
 
-        // else, group of 4 comments returned to be displayed
-        const comments = await prisma.comment.findMany({
-            where: {
-                themeId: theme.id,
-                group: 1
-            }
-        });
-        return res.status(200).json(comments);
+                // retrieves the theme's id as set by the database
+                const storedTheme = await prisma.theme.findUnique({
+                    where: {
+                        theme: req.body.theme
+                    }
+                })
+                const themeId = storedTheme.id;
+                const commentsStored = req.body.comments;
+                
+                // assign the theme's id to each comment's entry to relate them
+                await prisma.comment.createMany({
+                    data: [
+                        { group: 1, comment: commentsStored.comment1, author: commentsStored.author1, themeId: themeId },
+                        { group: 1, comment: commentsStored.comment2, author: commentsStored.author2, themeId: themeId },
+                        { group: 1, comment: commentsStored.comment3, author: commentsStored.author3, themeId: themeId },
+                        { group: 1, comment: commentsStored.comment4, author: commentsStored.author4, themeId: themeId }
+                    ]
+                })
+                return res.status(200).send("New theme and comments stored in database!");;
+        }
     }
 
     catch (error) {

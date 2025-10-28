@@ -11,6 +11,7 @@ async function generate() {
     }
     else if (this.id == "generateRandomButton") {
         // random generation
+
         theme = "?";
 
         updateSpan("generatedTheme", "?");
@@ -21,14 +22,13 @@ async function generate() {
 
     // check if user theme is in database and retrieve the corresponding group of comments
     var comments = await findThemeInDatabase(theme);
-    // if user theme does not exist, call gemini to generate and store in database after
     if (comments != null) {
         comments = formatJSON(comments);
     }
+    // if user theme does not exist, call gemini to generate and store in database after
     else {
-        console.log("Theme does not exist in database");
         comments = await callGemini(theme);
-        // storeThemeInDatabase(theme, comments);
+        storeThemeInDatabase(theme, comments);
     }
 
     displayGeneration(comments);
@@ -71,12 +71,13 @@ function enableButton(button) {
 function resizeButton(button, textChange) {
     const startWidth = button.offsetWidth;
 
-    // add width change text here
+    // changes the text of the button
     const generateSpan = button.children[0];
     generateSpan.innerHTML = textChange;
 
     const endWidth = button.offsetWidth;
 
+    // changes the width of the button
     button.style.width = startWidth + "px";
     button.classList.add("resize");
 
@@ -84,6 +85,7 @@ function resizeButton(button, textChange) {
 
     button.style.width = endWidth + "px";
 
+    // sets a smooth transition for the button to resize
     const onTransitionEnd = (e) => {
         if (e.propertyName === "width") {
             button.classList.remove("resize");
@@ -94,7 +96,7 @@ function resizeButton(button, textChange) {
     button.addEventListener("transitionend", onTransitionEnd);
 }
 
-// 
+// finds the theme and returns related comments (if any) from the database
 async function findThemeInDatabase(theme) {
     try {
         const response = await fetch("/api/server", {
@@ -102,6 +104,7 @@ async function findThemeInDatabase(theme) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 type: "database",
+                action: "findTheme",
                 theme: theme
             })
         });
@@ -113,15 +116,14 @@ async function findThemeInDatabase(theme) {
         const comments = await response.json();
         return comments;
     }
-
-    // handling errors with the prisma database
+    // handling errors (i.e. a theme does not exist in the database)
     catch (error) {
-        console.error("Error fetching data from Prisma Database:", error);
+        console.error("Error fetching data from Prisma Database: ", error);
         return null;
     }
 }
 
-// format
+// formatting retrieved comments from the database into a JSON object
 function formatJSON(comments) {
     const commentsJSON = {
         "comment1": comments[0].comment,
@@ -136,33 +138,31 @@ function formatJSON(comments) {
     return commentsJSON;
 }
 
-// calling the database for themes (if any)
-// async function storeThemeInDatabase() {
-//     try {
-//         const response = await fetch("/api/server", {
-//             method: "POST",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify({
-//                 type: "database",
-//                 action: "getThemes"
-//             })
-//         });
+// storing a new theme and its related comments in the database
+async function storeThemeInDatabase(theme, comments) {
+    try {
+        const response = await fetch("/api/server", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                type: "database",
+                action: "storeTheme",
+                theme: theme,
+                comments: comments
+            })
+        });
         
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
-//         // data is presented as a list, with the first index being the first entry
-//         const data = await response.json();
-//         console.log(data[0].id + ": " + data[0].theme);
-//     }
-
-//     // handling errors with the prisma database
-//     catch (error) {
-//         console.error("Error fetching themes from Prisma Database:", error);
-//         return null;
-//     }
-// }
+        return null;
+    }
+    catch (error) {
+        console.error("Error storing theme/ comments in Prisma Database: ", error);
+        return null;
+    }
+}
 
 // sends a request to the backend to call the gemini api to generate comments
 async function callGemini(theme) {
@@ -235,13 +235,12 @@ async function callGemini(theme) {
 
         const data = await response.json();
         const comments = JSON.parse(data.candidates[0].content.parts[0].text);
-        // displayGeneration(comments);
         return comments;
     }
 
     // handling errors with the gemini api
     catch (error) {
-        console.error("Error fetching structured output from Gemini API:", error);
+        console.error("Error fetching structured output from Gemini API: ", error);
         return null;
     }
 }
@@ -284,7 +283,7 @@ function displayGeneration(comments) {
     displayBox.addEventListener("transitionend", onTransitionEnd);
 }
 
-// 
+// updates the text of a span and fades it in smoothly
 function updateSpan(spanIdentifier, spanText) {
     const span = document.getElementById(spanIdentifier);
     span.style.opacity = 0;
@@ -345,7 +344,7 @@ function toggleTimer() {
 }
 document.getElementById("startButton").addEventListener("click", toggleTimer);
 
-// 
+// resets the timer once the countdown is complete
 function resetTimer() {
     if (time != 0) {
         time = 0;
@@ -381,7 +380,7 @@ function displayTime() {
 
 // TEXT EDITOR
 
-// undo and redo button functionality
+// connecting the undo and redo keyboard shortcuts to the undo and redo buttons
 const editor = document.getElementById("editor");
 
 function undo() {
@@ -403,8 +402,7 @@ function unlock() {
 }
 document.getElementById("unlockButton").addEventListener("click", unlock);
 
-// disabling the paste and cut functions
-
+// disabling the cut and paste functions
 function disableFunctions() {
     const textarea = document.getElementById("editor");
     if (textarea) {

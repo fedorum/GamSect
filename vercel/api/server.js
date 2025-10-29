@@ -21,10 +21,10 @@ export default async function handler(req, res) {
 
 // importing the prisma client to use its commands to access the database
 import { PrismaClient } from '@prisma/client';
-// import { withRandom } from '@prisma-extension-random';
+import prismaRandom from 'prisma-extension-random';
 
-// const prisma = new PrismaClient().$extends(withRandom());
-const prisma = new PrismaClient();
+const prisma = new PrismaClient().$extends(prismaRandom());
+// const prisma = new PrismaClient();
 
 // handler function for database requests (finding a theme, storing a theme)
 async function handleDatabase(req, res) {
@@ -32,6 +32,18 @@ async function handleDatabase(req, res) {
         switch (req.body.action) {
             // finds the requested theme in the database and returns it
             case 'getComments':
+                // runs only for random generation
+                if (req.body.theme == "random") {
+                    // get random group of comments from random prompt
+                    const comments = await prisma.theme.findRandom({
+                        include: {
+                            comments: true
+                        }
+                    });
+                    return res.status(200).json(comments);
+                }
+
+                // runs only for custom generation
                 const theme = await prisma.theme.findUnique({
                     where: {
                         theme: req.body.theme

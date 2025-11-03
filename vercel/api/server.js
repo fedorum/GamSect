@@ -24,7 +24,6 @@ import { PrismaClient } from '@prisma/client';
 import prismaRandom from 'prisma-extension-random';
 
 const prisma = new PrismaClient().$extends(prismaRandom());
-// const prisma = new PrismaClient();
 
 // handler function for database requests (finding a theme, storing a theme)
 async function handleDatabase(req, res) {
@@ -38,8 +37,16 @@ async function handleDatabase(req, res) {
                     const comments = await prisma.theme.findRandom({
                         include: {
                             comments: true
+                        },
+                        where: {
+                            id: {
+                                not: {
+                                    in: req.body.excludedIds
+                                }
+                            }
                         }
                     });
+                    
                     return res.status(200).json(comments);
                 }
 

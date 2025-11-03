@@ -1,7 +1,5 @@
 // COMMENT GENERATION
 
-var groupNum = 1;
-
 // generates comments related to the user input when the 'generate' button is pressed
 async function generate() {
     const input = document.getElementById("userThemeInput");
@@ -114,17 +112,26 @@ function resizeButton(button, textChange) {
     button.addEventListener("transitionend", onTransitionEnd);
 }
 
+var excludedIds = [4];
+var groupNum = 1;
+
 // finds the theme and returns related comments (if any) from the database
 async function getCommentsFromDatabase(theme) {
+    let body = {
+        type: "database",
+        action: "getComments",
+        theme: theme
+    };
+
+    if (theme == "random") {
+        body.excludedIds = excludedIds;
+    }
+
     try {
         const response = await fetch("/api/server", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                type: "database",
-                action: "getComments",
-                theme: theme
-            })
+            body: JSON.stringify(body)
         });
         
         if (!response.ok) {
@@ -132,6 +139,11 @@ async function getCommentsFromDatabase(theme) {
         }
 
         const comments = await response.json();
+
+        if (theme == "random") {
+            excludedIds.push(comments.id);
+        }
+
         return comments;
     }
     // handling errors (i.e. a theme does not exist in the database)

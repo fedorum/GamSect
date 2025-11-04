@@ -123,6 +123,7 @@ async function getCommentsFromDatabase(theme) {
         theme: theme
     };
 
+    // random generation passes in the list of excluded themes into the request
     if (theme == "random") {
         body.excludedIds = excludedIds;
     }
@@ -140,6 +141,13 @@ async function getCommentsFromDatabase(theme) {
 
         const comments = await response.json();
 
+        // if all themes have been retrieved in random generation, reset the list of excluded themes
+        if (comments.reset) {
+            excludedIds = [4];
+            return getCommentsFromDatabase("random");
+        }
+
+        // add the retrieved theme's id to the list to exclude it from the next random generation call
         if (theme == "random") {
             excludedIds.push(comments.id);
         }

@@ -33,6 +33,13 @@ async function handleDatabase(req, res) {
             case 'getComments':
                 // runs only for random generation
                 if (req.body.theme == "random") {
+                    // get total number of themes to check if the client has retrieved all of them already
+                    const themeCount = await prisma.theme.count();
+                    
+                    if (req.body.excludedIds.length >= themeCount) {
+                        return res.status(200).json({ message: "all_seen", reset: true });
+                    }
+
                     // get random group of comments from random prompt
                     const comments = await prisma.theme.findRandom({
                         include: {

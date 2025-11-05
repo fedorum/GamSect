@@ -33,10 +33,18 @@ async function generate() {
         console.log("Theme and comments retrieved from database!");
     }
     // reroll button?
-    // else if (this.id === "rerollButton") {
+    else if (this.id === "rerollButton") {
+        // check if theme has other groups to reroll to, if not, leave comments undefined
         // const minGroupNum = comments.comments[0].group;
         // const maxGroupNum = comments.comments[comments.comments.length - 1].group;
-    // }
+
+        // used to test reroll button display
+        // comments = await getCommentsFromDatabase("random");
+        // theme = comments.theme;
+        // comments = comments.comments;
+        // comments = formatJSON(comments);
+        // console.log("Theme and comments retrieved from database!");
+    }
 
     // if the custom theme does not exist OR the generation is a reroll, call gemini to generate and store in database
     if (comments === undefined) {
@@ -54,6 +62,7 @@ async function generate() {
 }
 document.getElementById("generateCustomButton").addEventListener("click", generate);
 document.getElementById("generateRandomButton").addEventListener("click", generate);
+document.getElementById("rerollButton").addEventListener("click", generate);
 
 // reroll function
 function reroll() {
@@ -66,7 +75,12 @@ function disableButton(button) {
     button.disabled = true;
     button.classList.add("active");
     
-    resizeButton(button, "Generating");
+    if (button.id === "rerollButton") {
+        resizeButton(button, "Rerolling");
+    }
+    else {
+        resizeButton(button, "Generating");
+    }
     
     const loaderSpan = button.children[1];
     loaderSpan.classList.add("active");
@@ -74,10 +88,16 @@ function disableButton(button) {
 
 // re-styles the button and allows it to be clicked again
 function enableButton(button) {
+    console.log(button.children);
     const loaderSpan = button.children[1];
     loaderSpan.classList.remove("active");
 
-    resizeButton(button, "Generate");
+    if (button.id === "rerollButton") {
+        resizeButton(button, "Reroll");
+    }
+    else {
+        resizeButton(button, "Generate");
+    }
 
     button.classList.remove("active");
     button.disabled = false;

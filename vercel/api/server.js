@@ -32,7 +32,7 @@ async function handleDatabase(req, res) {
             // finds the requested theme in the database and returns it
             case 'getComments':
                 // runs only for random generation
-                if (req.body.theme == "random") {
+                if (req.body.theme === "random") {
                     // get total number of themes to check if the client has retrieved all of them already
                     const themeCount = await prisma.theme.count();
                     
@@ -65,7 +65,7 @@ async function handleDatabase(req, res) {
                 });
                 
                 // if theme does not exist in database, return null
-                if (theme == null) {
+                if (theme === null) {
                     return res.status(200).send("Theme does not exist in database, will call Gemini instead");
                 }
         
@@ -87,7 +87,7 @@ async function handleDatabase(req, res) {
                 });
 
                 // if theme does not exist, create an entry
-                if (storedTheme == null) {
+                if (storedTheme === null) {
                     await prisma.theme.create({
                         data: {
                             theme: req.body.theme

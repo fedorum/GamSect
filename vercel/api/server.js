@@ -57,25 +57,21 @@ async function handleDatabase(req, res) {
                     return res.status(200).json(comments);
                 }
 
-                // runs only for custom generation
-                const theme = await prisma.theme.findUnique({
+                // runs for custom generation
+                const comments = await prisma.theme.findUnique({
                     where: {
                         theme: req.body.theme
+                    },
+                    include: {
+                        comments: true
                     }
                 });
                 
                 // if theme does not exist in database, return null
-                if (theme === null) {
+                if (comments === null) {
                     return res.status(200).send("Theme does not exist in database, will call Gemini instead");
                 }
         
-                // else, group of 4 comments are returned to be displayed
-                const comments = await prisma.comment.findMany({
-                    where: {
-                        themeId: theme.id,
-                        group: 1
-                    }
-                });
                 return res.status(200).json(comments);
             
             // stores a theme and its related comments in the database
@@ -107,10 +103,10 @@ async function handleDatabase(req, res) {
                 // assign the theme's id to each comment's entry to relate them
                 await prisma.comment.createMany({
                     data: [
-                        { group: 1, comment: commentsStored.comment1, author: commentsStored.author1, themeId: themeId },
-                        { group: 1, comment: commentsStored.comment2, author: commentsStored.author2, themeId: themeId },
-                        { group: 1, comment: commentsStored.comment3, author: commentsStored.author3, themeId: themeId },
-                        { group: 1, comment: commentsStored.comment4, author: commentsStored.author4, themeId: themeId }
+                        { group: req.body.groupNum, comment: commentsStored.comment1, author: commentsStored.author1, themeId: themeId },
+                        { group: req.body.groupNum, comment: commentsStored.comment2, author: commentsStored.author2, themeId: themeId },
+                        { group: req.body.groupNum, comment: commentsStored.comment3, author: commentsStored.author3, themeId: themeId },
+                        { group: req.body.groupNum, comment: commentsStored.comment4, author: commentsStored.author4, themeId: themeId }
                     ]
                 });
                 return res.status(200).send("New theme and comments stored in database!");

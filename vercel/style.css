@@ -93,7 +93,6 @@ span {
     margin-top: auto;
     margin-bottom: auto;
     font-weight: bold;
-    /* font-size: 22px; */
 }
 
 #rerollButton {
@@ -101,29 +100,29 @@ span {
     padding: 4px 6px;
     font-size: 14px;
     position: relative;
-    background-color: rgb(250, 250, 0);
-    box-shadow: 0 3px rgb(240, 240, 0);
-    border: 1px solid rgb(230, 230, 0);
+    color: white;
+    background-color: rgb(40, 40, 40);
+    box-shadow: 0 3px rgb(30, 30, 30);
+    border: 1px solid rgb(20, 20, 20);
     border-radius: 4px;
 }
 
-#rerollButton:hover {
-    background-color: rgb(240, 240, 0);
-    border: 1px solid rgb(220, 220, 0);
+#rerollButton:disabled,
+#rerollButton:disabled:hover {
+    background-color: rgb(40, 40, 40);
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-#rerollButton:active,
+#rerollButton:hover {
+    background-color: rgb(30, 30, 30);
+    border: 1px solid rgb(10, 10, 10);
+}
+
 #rerollButton.active {
     padding-right: 26px;
-    background-color: rgb(240, 240, 0);
-    box-shadow: 0 2px rgb(230, 230, 0);
+    box-shadow: 0 2px rgb(10, 10, 10);
     transform: translateY(1px);
-    cursor: not-allowed;
-}
-
-#rerollButton.active:hover {
-    background-color: rgb(240, 240, 0);
-    border: 1px solid rgb(230, 230, 0);
 }
 
 .commentNumber {
@@ -225,18 +224,17 @@ span {
     border: 1px solid rgb(0, 140, 0);
 }
 
-#generateCustomButton:active,
 #generateCustomButton.active {
     padding-right: 26px;
-    background-color: rgb(0, 160, 0);
     box-shadow: 0 2px rgb(0, 150, 0);
     transform: translateY(1px);
-    cursor: not-allowed;
 }
 
-#generateCustomButton.active:hover {
-    background-color: rgb(0, 160, 0);
-    border: 1px solid rgb(0, 150, 0);
+#generateCustomButton:disabled,
+#generateCustomButton:disabled:hover {
+    background-color: rgb(0, 170, 0);
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 #generateRandomButton {
@@ -250,18 +248,17 @@ span {
     border: 1px solid rgb(0, 130, 182);
 }
 
-#generateRandomButton:active,
 #generateRandomButton.active {
     padding-right: 26px;
-    background-color: rgb(0, 140, 196);
     box-shadow: 0 2px rgb(0, 130, 182);
     transform: translateY(1px);
-    cursor: not-allowed;
 }
 
-#generateRandomButton.active:hover {
-    background-color: rgb(0, 140, 209);
-    border: 1px solid rgb(0, 130, 182);
+#generateRandomButton:disabled,
+#generateRandomButton:disabled:hover {
+    background-color: rgb(0, 150, 209);
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
 #border {

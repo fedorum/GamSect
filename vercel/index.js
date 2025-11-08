@@ -8,16 +8,36 @@ var groupNum = 1;
 // generates comments related to the user input when the 'generate' button is pressed
 async function generate() {
     const input = document.getElementById("userThemeInput");
-    var comments;
+
+    if ((input.value === "") && (this.id === "generateCustomButton")) {
+        input.placeholder = "Please input a theme first!";
+        input.classList.add("invalid");
+        // special press down for custom button only?
+        return;
+    }
+
+    var comments = null;
     var type;
     activateButton(this);
     input.disabled = true;
 
-    // if 
-    if (this.id === "generateRandomButton") {
+    // if custom generation is selected, specific comments are retrieved from the database
+    if (this.id === "generateCustomButton") {
+        groupNum = 1;
+        type = "custom";
+        theme = capitalise(input.value);
+        updateSpan("generatedTheme", theme);
+
+        allComments = await getCommentsFromDatabase(theme);
+        comments = allComments.comments;
+    }
+
+    // if random generation is selected, comments are randomly retrieved from the database
+    else if (this.id === "generateRandomButton") {
         groupNum = 1;
         type = "random";
         updateSpan("generatedTheme", "?");
+
         allComments = await getCommentsFromDatabase("random");
         theme = allComments.theme;
         comments = allComments.comments;
@@ -25,20 +45,10 @@ async function generate() {
     
     // if theme was randomly generated, maybe hide the true theme behind display toggle button?
 
-    // if 
-    else if (this.id === "generateCustomButton") {
-        groupNum = 1;
-        type = "custom";
-        theme = capitalise(input.value);
-        updateSpan("generatedTheme", theme);
-        allComments = await getCommentsFromDatabase(theme);
-        comments = allComments.comments;
-    }
-
-    // if
+    // if a reroll is selected, a different group of comments under the same theme is retrieved
     else if (this.id === "rerollButton") {
         type = "reroll";
-        // groupNum += 1;
+        groupNum += 1;
         const index = ((groupNum - 1) * 4);
 
         if (index < allComments.comments.length) {
@@ -56,7 +66,7 @@ async function generate() {
         comments = formatJSON(comments);
         console.log("Theme and comments retrieved from database!");
     }
-    // if the custom theme does not exist OR the generation is a reroll, call gemini to generate and store in database
+    // if a custom theme does not exist OR a reroll is selected, call gemini to generate and store in database
     else {
         comments = await callGemini(theme, type);
         storeCommentsInDatabase(comments);
@@ -67,6 +77,8 @@ async function generate() {
     deactivateButton(this);
     input.disabled = false;
     input.value = "";
+    input.placeholder = "";
+    input.classList.remove("invalid");
 }
 document.getElementById("rerollButton").addEventListener("click", generate);
 document.getElementById("generateCustomButton").addEventListener("click", generate);
@@ -243,12 +255,14 @@ async function callGemini(theme, type) {
                     If possible, comments should come from notable authors. If not, do not include any author for the specific comment. \
                     Only include the full names of the authors, and not their professions or positions.`;
             break;
-        // case 'reroll':
-        //     text = `You are a setter for section II of the GAMSAT exam. \
-        //             Find or generate 4 short, simple, and succinct comments in the style of the exam on any one-word theme. \
-        //             If possible, comments should come from notable authors. If not, do not include any author for the specific comment. \
-        //             Only include the full names of the authors, and not their professions or positions.`;
-        //     break;
+        case 'reroll':
+            const commentsList = JSON.stringify(allComments.comments);
+            text = `You are a setter for section II of the GAMSAT exam. \
+                    Find or generate 4 short, simple, and succinct comments in the style of the exam on the theme of ${theme}. \
+                    The group of comments should consider a perspective that is different to that of the groups of comments in the following list: ${commentsList} \
+                    If possible, comments should come from notable authors. If not, do not include any author for the specific comment. \
+                    Only include the full names of the authors, and not their professions or positions.`;
+            break;
     }
 
     // specifying the type of response to be received from gemini

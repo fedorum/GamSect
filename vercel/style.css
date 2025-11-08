@@ -119,10 +119,14 @@ span {
     border: 1px solid rgb(10, 10, 10);
 }
 
+#rerollButton:active,
 #rerollButton.active {
-    padding-right: 26px;
     box-shadow: 0 2px rgb(10, 10, 10);
     transform: translateY(1px);
+}
+
+#rerollButton.active {
+    padding-right: 26px;
 }
 
 .commentNumber {
@@ -178,6 +182,11 @@ span {
     font-size: 14px;
 }
 
+#userThemeInput.invalid {
+    border: 2px solid red;
+    border-radius: 4px;
+}
+
 #generateCustomButton,
 #generateRandomButton {
     margin-left: auto;
@@ -224,10 +233,14 @@ span {
     border: 1px solid rgb(0, 140, 0);
 }
 
+#generateCustomButton:active,
 #generateCustomButton.active {
-    padding-right: 26px;
     box-shadow: 0 2px rgb(0, 150, 0);
     transform: translateY(1px);
+}
+
+#generateCustomButton.active {
+    padding-right: 26px;
 }
 
 #generateCustomButton:disabled,
@@ -248,10 +261,14 @@ span {
     border: 1px solid rgb(0, 130, 182);
 }
 
+#generateRandomButton:active,
 #generateRandomButton.active {
-    padding-right: 26px;
     box-shadow: 0 2px rgb(0, 130, 182);
     transform: translateY(1px);
+}
+
+#generateRandomButton.active {
+    padding-right: 26px;
 }
 
 #generateRandomButton:disabled,

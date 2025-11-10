@@ -205,9 +205,7 @@ async function getCommentsFromDatabase(theme) {
         }
 
         // add the retrieved theme's id to the list to exclude it from the next random generation call
-        if (theme === "random") {
-            excludedIds.push(comments.id);
-        }
+        excludedIds.push(comments.id);
 
         return comments;
     }
@@ -438,6 +436,7 @@ function capitalise(string) {
 // TIMER
 
 var interval;
+var maxTime = 0;
 var time = 0;
 
 // gets the user inputted time and starts the timer
@@ -448,7 +447,8 @@ function toggleTimer() {
     if (buttonValue === "Start") {
         // if the user has inputted a time and if no previous timer has been inputted, process the new time
         if (userTime != "") {
-            time = userTime * 60;
+            maxTime = userTime * 60;
+            time = maxTime;
         }
         // if time is not 0 (i.e. invalid), start the timer and toggle the button to stop the timer
         if (time != 0) {
@@ -468,12 +468,10 @@ document.getElementById("startButton").addEventListener("click", toggleTimer);
 
 // resets the timer once the countdown is complete
 function resetTimer() {
-    if (time != 0) {
-        time = 0;
-        clearInterval(interval);
-        document.getElementById("countdown").innerHTML = "00:00";
-        document.getElementById("startButton").innerHTML = "Start";
-    }
+    time = maxTime;
+    clearInterval(interval);
+    displayTime();
+    document.getElementById("startButton").innerHTML = "Start";
 }
 document.getElementById("resetButton").addEventListener("click", resetTimer);
 

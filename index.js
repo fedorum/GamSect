@@ -182,16 +182,12 @@ async function getCommentsFromDatabase(theme) {
     const body = {
         type: "database",
         action: "getComments",
-        theme: theme
+        theme: theme,
+        excludedIds: excludedIds
     };
 
-    // random generation passes in the list of excluded themes into the request
-    if (theme === "random") {
-        body.excludedIds = excludedIds;
-    }
-
     try {
-        const response = await fetch("/api/server", {
+        const response = await fetch("./api/server.js", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -224,7 +220,7 @@ async function getCommentsFromDatabase(theme) {
 // storing a new theme and its related comments in the database
 async function storeCommentsInDatabase(comments) {
     try {
-        const response = await fetch("/api/server", {
+        const response = await fetch("./api/server.js", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -322,7 +318,7 @@ async function callGemini(theme, type) {
 
     // the response is received from the backend in the form of 4 comments
     try {
-        const response = await fetch("/api/server", {
+        const response = await fetch("./api/server.js", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),

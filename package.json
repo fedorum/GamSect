@@ -4,5 +4,6 @@
     "prisma": "^6.18.0",
     "prisma-extension-random": "^0.2.2"
   },
-  "type": "module"
+  "type": "module",
+  "build": "npx prisma db push && npx prisma generate && next build"
 }

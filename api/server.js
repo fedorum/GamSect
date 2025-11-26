@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 // PRISMA POSTGRES DATABASE CALLS
 
 // importing the prisma client to use its commands to access the database
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../prisma/generated/client/index.js';
 import prismaRandom from 'prisma-extension-random';
 
 const prisma = new PrismaClient().$extends(prismaRandom());

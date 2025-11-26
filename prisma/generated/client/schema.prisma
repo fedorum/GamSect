@@ -1,0 +1,25 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated/client"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Theme {
+  id       Int       @id @default(autoincrement())
+  theme    String    @unique
+  comments Comment[]
+}
+
+model Comment {
+  id      Int     @id @default(autoincrement())
+  group   Int
+  comment String  @unique
+  author  String?
+  themeId Int
+  theme   Theme   @relation(fields: [themeId], references: [id])
+}
